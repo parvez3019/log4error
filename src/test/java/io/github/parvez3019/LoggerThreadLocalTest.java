@@ -1,4 +1,4 @@
-package org.parvez3019.os;
+package io.github.parvez3019;
 
 import org.junit.jupiter.api.Test;
 

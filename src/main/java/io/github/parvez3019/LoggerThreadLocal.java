@@ -1,9 +1,12 @@
-package org.parvez3019.os;
+package io.github.parvez3019;
+
+import org.springframework.stereotype.Component;
 
 /**
  * ThreadLocal Instance can be created with the help of this class, this provides a custom wrapper over
  * Logger and ThreadLocal
  */
+@Component
 public class LoggerThreadLocal extends ThreadLocal<Logger>{
 
     /**
