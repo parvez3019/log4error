@@ -6,7 +6,7 @@
 
     <groupId>org.parvez3019.os</groupId>
     <artifactId>info-log-optimizer</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -42,4 +42,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+   <build>
+       <plugins>
+           <plugin>
+               <groupId>org.sonatype.central</groupId>
+               <artifactId>central-publishing-maven-plugin</artifactId>
+               <version>0.4.0</version>
+               <extensions>true</extensions>
+               <configuration>
+                   <publishingServerId>central</publishingServerId>
+                   <tokenAuth>true</tokenAuth>
+               </configuration>
+           </plugin>
+       </plugins>
+   </build>
 </project>
