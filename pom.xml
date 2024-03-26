@@ -7,6 +7,19 @@
     <groupId>org.parvez3019.os</groupId>
     <artifactId>info-log-optimizer</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>info-log-optimizer</name>
+    <description>info-log-optimizer is a library that helps with logging info logs only when exceptions occurs
+    </description>
+    <url>https://github.com/parvez3019/info-log-optimizer</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -42,18 +55,105 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-   <build>
-       <plugins>
-           <plugin>
-               <groupId>org.sonatype.central</groupId>
-               <artifactId>central-publishing-maven-plugin</artifactId>
-               <version>0.4.0</version>
-               <extensions>true</extensions>
-               <configuration>
-                   <publishingServerId>central</publishingServerId>
-                   <tokenAuth>true</tokenAuth>
-               </configuration>
-           </plugin>
-       </plugins>
-   </build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keyname>0x6F749470</keyname>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <name>Parvez Hassan</name>
+            <email>pha3019@gmail.com</email>
+            <organization>io.github.parvez3019</organization>
+            <organization>https://github.com/parvez3019</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/parvez3019/info-log-optimizer.git</connection>
+        <developerConnection>scm:git:ssh://github.com:parvez3019/info-log-optimizer.git</developerConnection>
+        <url>https://github.com/parvez3019/info-log-optimizer.git</url>
+    </scm>
 </project>
