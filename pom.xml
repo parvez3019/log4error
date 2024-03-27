@@ -221,8 +221,8 @@
 
     <scm>
         <connection>scm:git:git://github.com/parvez3019/info-log-optimizer.git</connection>
-        <developerConnection>scm:git:ssh://github.com:parvez3019/info-log-optimizer.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com:parvez3019/info-log-optimizer.git</developerConnection>
         <url>https://github.com/parvez3019/info-log-optimizer.git</url>
       <tag>info-log-optimizer-0.0.1</tag>
-  </scm>
+    </scm>
 </project>
