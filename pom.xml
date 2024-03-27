@@ -151,7 +151,7 @@
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
-                            <passphrase>parvez3019</passphrase>
+                            <passphrase>${env.GPG_PASSPHRASE}</passphrase>
                         </configuration>
                     </execution>
                 </executions>
