@@ -17,23 +17,31 @@ Contextual, logical information or debugging-related information is not present 
 
 ## How to use it -
 
+### Create a LoggerFilter
+- Create a LoggerFilter.class for the initialization of Logger
+- Checkout `LoggerFilterExample.class` for reference.
+
+### Logger.info()
+- Using the Logger().info(String message, Object... obj) method you can collect the info logs, across your application.
+
 ```
-- Create a LoggerFilter.class for the initialization of Logger.
-  As given in example file ie - LoggerFilerExample.class
+  Logger().info(String message, Object... obj)
+  example - Logger().info("Here I am printing some logs with argument one: {} and arg 2 : {}", arg1, arg2)
+```
 
-- Logger().info(String message, Object... obj)
-  Using Logger().info(String message, Object... obj) method you can collect the info logs, across you application.
-  eg - Logger().info("Here I am printing some logs with argument one: {} and arg 2 : {}", arg1, arg2)
-
+### Logger.error()
+- Will print the complete info log stack until that point and will reset the info log stack to empty.
+```
 - Logger().error(String message, Object... obj);
-  - It will print the complete info log stack until that point and will reset the info log stack to empty.
+```
 
+### Static log methods
 - For static log methods you can use the following methods -
+```
   Logger.printInfo(String message, Object... obj)
   Logger.printError(String message, Object... obj)
   Logger.debug(String message, Object... obj)
   Logger.warn(String message, Object... obj)
-
 ```
 
 Installation
