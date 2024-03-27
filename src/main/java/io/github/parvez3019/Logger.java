@@ -23,8 +23,9 @@ public class Logger {
 
     /**
      * This method will be pushing info logs in to a stack of string
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public void info(String message, Object... obj) {
         this.infoLogs.push(MessageFormatter.arrayFormat(message, obj).getMessage());
@@ -34,8 +35,9 @@ public class Logger {
     /**
      * Error method will be print error, along with printing the whole info log stack, and will be responsible
      * for clearing the stack
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public void error(String message, Object... obj) {
         printInfoLogs();
@@ -59,8 +61,9 @@ public class Logger {
 
     /**
      * Wrapper over Logger info method
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public static void printInfo(String message, Object... obj) {
         LOGGER.info(message, obj);
@@ -68,8 +71,9 @@ public class Logger {
 
     /**
      * Wrapper over Logger error method
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public static void printError(String message, Object... obj) {
         LOGGER.error(message, obj);
@@ -77,8 +81,9 @@ public class Logger {
 
     /**
      * Wrapper over Logger warn method
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public static void warn(String message, Object... obj) {
         LOGGER.warn(message, obj);
@@ -86,8 +91,9 @@ public class Logger {
 
     /**
      * Wrapper over Logger debug method
+     *
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
-     * @param obj - array of objects
+     * @param obj     - array of objects
      */
     public static void debug(String message, Object... obj) {
         LOGGER.debug(message, obj);
