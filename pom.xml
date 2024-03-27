@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.2</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
 
     <groupId>io.github.parvez3019</groupId>
     <artifactId>info-log-optimizer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>info-log-optimizer</name>
@@ -225,5 +223,6 @@
         <connection>scm:git:git://github.com/parvez3019/info-log-optimizer.git</connection>
         <developerConnection>scm:git:ssh://github.com:parvez3019/info-log-optimizer.git</developerConnection>
         <url>https://github.com/parvez3019/info-log-optimizer.git</url>
-    </scm>
+      <tag>info-log-optimizer-0.0.1</tag>
+  </scm>
 </project>
