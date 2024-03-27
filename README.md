@@ -44,9 +44,9 @@ Contextual, logical information or debugging-related information is not present 
   Logger.warn(String message, Object... obj)
 ```
 
-Installation
+# Installation
 
-Add the following dependency to your pom.xml file
+## Add the following dependency to your pom.xml file
 ```
 <dependency>
   <groupId>io.github.parvez3019</groupId>
@@ -55,7 +55,7 @@ Add the following dependency to your pom.xml file
 </dependency>
 ```
 
-And Run
+## Run the following command for installation
 ```
 mvn clean install
 ```
