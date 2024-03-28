@@ -33,7 +33,7 @@ public class Logger {
             Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
             this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
         } else {
-            this.infoLogs.push(new InfoLoggerEvent(message, null));
+            this.infoLogs.push(new InfoLoggerEvent(message, obj));
         }
     }
 
