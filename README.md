@@ -16,9 +16,9 @@ Contextual, logical, or debugging information is not present since you have disa
 - That helps debug issues when they occur and reduces overall logging data.
 
 ## Performance difference -
-- There is definitely going to be performance difference between both logging approaches.
-- Since we are keeping an in memory local stack of info logs, we are ingesting info log messages during info statements.
-- And printing all info logs during error, there is increase in time to process both usage.
+- There is going to be a performance difference between both logging approaches.
+- Since we are keeping an in-memory local stack of info logs, we are ingesting info log messages during info statements.
+- And printing all info logs during error, there is an increase in time to process both usages.
 
 ```
 RUN Suite of 10 sets while logging 10,000 times each time to get average performance -
@@ -32,7 +32,7 @@ Log4j - Average log time was 15 ns
 info-log-optimizer - Average log time was 42 ns
 ```
 
-Based on this trade off, you can decide whether this will be helpful for you or not?
+Based on this trade-off, you can decide whether this will be helpful for you or not.
 
 ## How to use it -
 
@@ -110,7 +110,7 @@ Reference For GitHub token and dependency download - [Link](https://docs.github.
 <dependency>
   <groupId>io.github.parvez3019</groupId>
   <artifactId>info-log-optimizer</artifactId>
-  <version>0.0.3</version>
+  <version>{LATEST_VERSION}</version>
 </dependency>
 ```
 
