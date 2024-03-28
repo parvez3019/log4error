@@ -1,4 +1,4 @@
-# What is info-log-optimizer?
+# What is `log4error`?
 
 We often see organisations turning off `INFO` level logs in production to reduce the logging cost.
 I have worked in many projects where teams have only enabled `ERROR` level logs in production.
@@ -7,7 +7,7 @@ The problem with logging only an `ERROR` log is you don't get any other informat
 Contextual, logical, or debugging information is not present since you have disabled info logs.
 
 
-## With `info-log-optimizer` library -
+## With `log4error` library -
 - You can `COLLECT INFO LOGS` on the GO and `print` them to the console only when an `exception occurs`.
 
 ## How it works? 
@@ -15,7 +15,7 @@ Contextual, logical, or debugging information is not present since you have disa
 - When you print an error log at any statement, at the point it prints the complete info stack for reference.
 - That helps debug issues when they occur and reduces overall logging data.
 
-## Performance difference -
+## Performance Statistics -
 - There is going to be a performance difference between both logging approaches.
 - Since we are keeping an in-memory local stack of info logs, we are ingesting info log messages during info statements.
 - And printing all info logs during error, there is an increase in time to process both usages.
@@ -25,11 +25,11 @@ RUN Suite of 10 sets while logging 10,000 times each time to get average perform
 
 Info Logs -
 Log4j - Average log time was 15 ns
-info-log-optimizer -  Average log time was 38 ns
+log4error -  Average log time was 38 ns
 
 ERROR Logs - 
 Log4j - Average log time was 15 ns
-info-log-optimizer - Average log time was 42 ns
+log4error - Average log time was 42 ns
 ```
 
 Based on this trade-off, you can decide whether this will be helpful for you or not.
@@ -37,7 +37,7 @@ Based on this trade-off, you can decide whether this will be helpful for you or 
 ## How to use it -
 
 ### Create a LoggerFilter
-- Create a LoggerFilter.class for the initialization of Logger
+- Create a `LoggerFilter.Class` for the initialization of Logger
 - Check out `LoggerFilterExample.class` for reference.
 
 ### Logger.info()
@@ -93,7 +93,7 @@ Based on this trade-off, you can decide whether this will be helpful for you or 
         </repository>
         <repository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/parvez3019/info-log-optimizer/</url>
+          <url>https://maven.pkg.github.com/parvez3019/log4error/</url>
           <snapshots>
             <enabled>true</enabled>
           </snapshots>
@@ -109,7 +109,7 @@ Reference For GitHub token and dependency download - [Link](https://docs.github.
 ```
 <dependency>
   <groupId>io.github.parvez3019</groupId>
-  <artifactId>info-log-optimizer</artifactId>
+  <artifactId>log4error</artifactId>
   <version>{LATEST_VERSION}</version>
 </dependency>
 ```

@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.parvez3019</groupId>
-    <artifactId>info-log-optimizer</artifactId>
+    <artifactId>log4error</artifactId>
     <version>0.0.5</version>
     <packaging>jar</packaging>
 
-    <name>info-log-optimizer</name>
-    <description>info-log-optimizer is a library that helps with logging info logs only when exceptions occurs
+    <name>log4error</name>
+    <description>log4error is a library that helps with logging info logs only when exceptions occurs
     </description>
-    <url>https://github.com/parvez3019/info-log-optimizer</url>
+    <url>https://github.com/parvez3019/log4error</url>
 
     <licenses>
         <license>
@@ -72,7 +72,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/parvez3019/info-log-optimizer</url>
+            <url>https://maven.pkg.github.com/parvez3019/log4error</url>
         </repository>
     </distributionManagement>
 
