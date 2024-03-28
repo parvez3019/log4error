@@ -15,6 +15,25 @@ Contextual, logical, or debugging information is not present since you have disa
 - When you print an error log at any statement, at the point it prints the complete info stack for reference.
 - That helps debug issues when they occur and reduces overall logging data.
 
+## Performance difference -
+- There is definitely going to be performance difference between both logging approaches.
+- Since we are keeping an in memory local stack of info logs, we are ingesting info log messages during info statements.
+- And printing all info logs during error, there is increase in time to process both usage.
+
+```
+RUN Suite of 10 sets while logging 10,000 times each time to get average performance -
+
+Info Logs -
+Log4j - Average log time was 15 ns
+info-log-optimizer -  Average log time was 38 ns
+
+ERROR Logs - 
+Log4j - Average log time was 15 ns
+info-log-optimizer - Average log time was 42 ns
+```
+
+Based on this trade off, you can decide whether this will be helpful for you or not?
+
 ## How to use it -
 
 ### Create a LoggerFilter
