@@ -12,7 +12,7 @@ import java.util.Stack;
 public class Logger {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Logger.class);
 
-    private final Stack<String> infoLogs;
+    private final Stack<InfoLoggerEvent> infoLogs;
 
     /**
      * No argument constructor for Logger.Class
@@ -28,9 +28,14 @@ public class Logger {
      * @param obj     - array of objects
      */
     public void info(String message, Object... obj) {
-        this.infoLogs.push(MessageFormatter.arrayFormat(message, obj).getMessage());
+        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
+        if (throwableCandidate != null) {
+            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
+            this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
+        } else {
+            this.infoLogs.push(new InfoLoggerEvent(message, obj));
+        }
     }
-
 
     /**
      * Error method will be print error, along with printing the whole info log stack, and will be responsible
@@ -49,7 +54,9 @@ public class Logger {
      * Print info log stack
      */
     public void printInfoLogs() {
-        infoLogs.forEach(LOGGER::info);
+        infoLogs.forEach(p -> {
+            LOGGER.info(p.getMessage(), p.getArgArray());
+        });
     }
 
     /**
