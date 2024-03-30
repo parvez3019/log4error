@@ -3,6 +3,9 @@ package io.github.parvez3019;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PerformanceTest {
 
     @Test
@@ -29,14 +32,15 @@ public class PerformanceTest {
         int runs = 100 * 1000;
         long start = System.nanoTime();
         for (int i = 0; i < runs; i++)
-            LOGGER.error("here");
+            LOGGER.info("here");
+        LOGGER.error("print error {}", "some error");
         long time = System.nanoTime() - start;
         System.out.printf("Average log time was %,d ns%n", time / runs);
 
         Logger logger = new Logger();
-        for (int i = 0; i < runs; i++)
-            logger.info("Printing logs! {}" + i);
         long errorStartTime = System.nanoTime();
+        for (int i = 0; i < runs; i++)
+            logger.info("here");
         logger.error("print error {}", "some error");
         long errorEndTime = System.nanoTime() - errorStartTime;
         System.out.printf("Average log time was %,d ns%n", errorEndTime / runs);
