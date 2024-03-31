@@ -36,7 +36,7 @@ public class LoggerThreadLocal extends ThreadLocal<Logger>{
     }
 
     /**
-     * @return a instance of Logger, if logger instance is null, then it will create a new instance,
+     * @return an instance of Logger, if logger instance is null, then it will create a new instance,
      * will set it to thread local context and returns it.
      */
     public Logger getLogger() {
