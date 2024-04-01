@@ -24,11 +24,9 @@ jobs:
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
-          git-user-signingkey: true
-          git-commit-gpgsign: true
-          git-tag-gpgsign: true
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_KEY }}
-          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          gpg_private_key: ${{ secrets.GPG_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
         env:
