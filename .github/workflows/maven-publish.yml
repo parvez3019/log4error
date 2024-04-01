@@ -24,13 +24,8 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Publish to the Maven Central Repository
+        run: mvn --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: |
-          echo $MAVEN_USERNAME
-          echo $MAVEN_USERNAME
-          echo $MAVEN_GPG_PASSPHRASE
-          echo $TEST_TEST
-          echo $JAVA_HOME
