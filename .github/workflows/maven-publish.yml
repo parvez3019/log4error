@@ -30,4 +30,4 @@ jobs:
         run: |
           echo ${#MAVEN_USERNAME}
           echo ${#MAVEN_GPG_PASSPHRASE}
-          echo ${#JAVA_HOME}
+          echo $JAVA_HOME
