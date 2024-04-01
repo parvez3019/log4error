@@ -24,8 +24,8 @@ jobs:
         run: ./builder.sh config_gpg
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-      - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
+#      - name: Publish to the Maven Central Repository
+#        run: mvn --batch-mode deploy
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
