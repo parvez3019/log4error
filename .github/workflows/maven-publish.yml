@@ -19,10 +19,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           server-id: central
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_CENTRAL_TOKEN
+          server-username: ${{ secrets.USERNAME }}
+          server-password: ${{ secrets.CENTRAL_TOKEN }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
         env:
