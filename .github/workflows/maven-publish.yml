@@ -22,10 +22,6 @@ jobs:
           server-password: MAVEN_CENTRAL_TOKEN
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }} #
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Configure GPG Key
-        run: ./builder.sh config_gpg
-        env:
-          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
         env:
