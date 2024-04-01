@@ -67,53 +67,35 @@ Based on this trade-off, you can decide whether this will be helpful for you or 
 
 # Installation
 
-## Add the following dependency to your pom.xml file
+## Maven Central Repository - [Link](https://central.sonatype.com/artifact/io.github.parvez3019/log4error)
 
-- Add Github Repository in your `settings.xml` (can be found at `~/.m2/` path)
-```
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd"
-          xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <servers>
-    <server>
-      <id>github</id>
-      <username>{Your-github-username}</username>
-      <password>{token-create-personal-classic-token-with-read-packages-access}</password>
-    </server>
-  </servers>
+### Add the following dependency to your pom.xml file
 
- <activeProfiles>
-    <activeProfile>github</activeProfile>
-  </activeProfiles>
-
-   <profiles>
-    <profile>
-      <id>github</id>
-      <repositories>
-        <repository>
-          <id>central</id>
-          <url>https://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/parvez3019/log4error/</url>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
-</settings>
-```
 
 Reference For GitHub token and dependency download - [Link](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages)
 
+Maven 
 ```
 <dependency>
-  <groupId>io.github.parvez3019</groupId>
-  <artifactId>log4error</artifactId>
-  <version>{LATEST_VERSION}</version>
+    <groupId>io.github.parvez3019</groupId>
+    <artifactId>log4error</artifactId>
+    <version>0.0.8</version>
 </dependency>
+```
+
+Gradle
+```
+implementation group: 'io.github.parvez3019', name: 'log4error', version: '0.0.8'
+```
+
+Gradle (short)
+```
+implementation 'io.github.parvez3019:log4error:0.0.8'
+```
+
+Gradle (kotlin)
+```
+implementation("io.github.parvez3019:log4error:0.0.8")
 ```
 
 
