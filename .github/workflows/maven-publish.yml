@@ -3,8 +3,7 @@ on:
   release:
     types: [created]
   push:
-    branches:
-      - main
+    branches: [main, develop]
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -25,8 +24,8 @@ jobs:
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           git_user_signingkey: true
-          gpg_private_key: ${{ secrets.GPG_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg_private_key: ${{ secrets.GITHUB_GPG_KEY }}
+          passphrase: ${{ secrets.GITHUB_GPG_PASSPHRASE }}
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
         env:
