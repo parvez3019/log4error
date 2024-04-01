@@ -6,11 +6,13 @@ I have worked in many projects where teams have only enabled `ERROR` level logs 
 The problem with logging only an `ERROR` log is you don't get any other information at the time of any unexpected incident, just the limited info from the error logs along with stack trace.
 Contextual, logical, or debugging information is not present since you have disabled info logs.
 
+# Detailed Article - 
+[Medium Link](https://medium.com/@pha3019/log4error-java-library-for-reduced-info-level-logging-5f1c29867fc4)
 
 ## With `log4error` library -
 - You can `COLLECT INFO LOGS` on the GO and `print` them to the console only when an `exception occurs`.
 
-## How it works? 
+## How does it work? 
 - It keeps collecting info logs in an in-memory request scoped local thread.
 - When you print an error log at any statement, at the point it prints the complete info stack for reference.
 - That helps debug issues when they occur and reduces overall logging data.
