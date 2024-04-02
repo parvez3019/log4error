@@ -82,8 +82,8 @@
                 <configuration>
                     <publishingServerId>central</publishingServerId>
                     <tokenAuth>true</tokenAuth>
-                    <autoPublish>true</autoPublish>
-                    <waitUntil>published</waitUntil>
+<!--                    <autoPublish>true</autoPublish>-->
+<!--                    <waitUntil>published</waitUntil>-->
                 </configuration>
             </plugin>
             <!-- Plugin for Javadoc and Sources -->
@@ -136,7 +136,6 @@
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
-                            <passphrase>${env.GPG_PASSPHRASE}</passphrase>
                         </configuration>
                     </execution>
                 </executions>
