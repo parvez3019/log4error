@@ -28,13 +28,14 @@ public class Logger {
      * @param obj     - array of objects
      */
     public void info(String message, Object... obj) {
-        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
-        if (throwableCandidate != null) {
-            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
-            this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
-        } else {
-            this.infoLogs.push(new InfoLoggerEvent(message, obj));
-        }
+//        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
+//        if (throwableCandidate != null) {
+//            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
+//            this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
+//        } else {
+//            this.infoLogs.push(new InfoLoggerEvent(message, obj));
+//        }
+        this.infoLogs.push(new InfoLoggerEvent(message, null));
     }
 
     /**
