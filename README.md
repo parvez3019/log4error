@@ -17,9 +17,17 @@ Contextual, logical, or debugging information is absent since you have disabled 
 - That helps debug issues when they occur and reduces overall logging data.
 
 ## Performance Statistics -
-- There is going to be a performance difference between both logging approaches.
-- Since we are keeping an in-memory local stack of info logs, we are ingesting info log messages during info statements.
+
+- Actual profiling hasn't been done yet (TBD).
+- Using this library we will be reducing total I/O operation as well.
+- For all happy flows we will not be making any system calls, we just be collecting logs on the go in an array.
+
+- There is going to be a performance difference for unhappy flows with the current implementation.
 - And printing all info logs during error, there is an increase in time to process both usages.
+- To Improve - Collect logs into a bulk record and print all logs on the error with a single I/O operation.
+
+Thanks to Christian Hujer pointed out that "Your library is actually _improving_ performance, always, at least in the happy path. Appending a log entry to a linked list (or array list, who cares these days…) is much cheaper than writing a log entry out. The former will almost never require a system call (only if the JVM process needs more memory from the OS), the latter will always require a system call (write)."
+
 
 ```
 RUN Suite of 10 sets while logging 10,000 times each time to get average performance -
@@ -32,8 +40,6 @@ ERROR Logs -
 Log4j - Average log time was 15 ns
 log4error - Average log time was 42 ns
 ```
-
-Based on this trade-off, you can decide whether this will be helpful for you or not.
 
 ## How to use it -
 
@@ -102,3 +108,4 @@ implementation("io.github.parvez3019:log4error:0.0.8")
 ```
 mvn clean install
 ```
+
