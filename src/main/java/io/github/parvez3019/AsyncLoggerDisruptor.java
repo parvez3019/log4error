@@ -237,34 +237,35 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
     }
 
     boolean tryPublish(final RingBufferLogEventTranslator translator) {
-        try {
+//        try {
             // Note: we deliberately access the volatile disruptor field afresh here.
             // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
             // was shut down, which could cause the publishEvent method to hang and never return.
-            return disruptor.getRingBuffer().tryPublishEvent(translator);
-        } catch (final NullPointerException npe) {
+//            return disruptor.getRingBuffer().tryPublishEvent(translator);
+//        } catch (final NullPointerException npe) {
             // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
-            logWarningOnNpeFromDisruptorPublish(translator);
-            return false;
-        }
+//            logWarningOnNpeFromDisruptorPublish(translator);
+//            return false;
+//        }
+        return true;
     }
 
     void enqueueLogMessageWhenQueueFull(final RingBufferLogEventTranslator translator) {
-        try {
-            // Note: we deliberately access the volatile disruptor field afresh here.
-            // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
-            // was shut down, which could cause the publishEvent method to hang and never return.
-            if (synchronizeEnqueueWhenQueueFull()) {
-                synchronized (queueFullEnqueueLock) {
-                    disruptor.publishEvent(translator);
-                }
-            } else {
-                disruptor.publishEvent(translator);
-            }
-        } catch (final NullPointerException npe) {
-            // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
-            logWarningOnNpeFromDisruptorPublish(translator);
-        }
+//        try {
+//            // Note: we deliberately access the volatile disruptor field afresh here.
+//            // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
+//            // was shut down, which could cause the publishEvent method to hang and never return.
+//            if (synchronizeEnqueueWhenQueueFull()) {
+//                synchronized (queueFullEnqueueLock) {
+//                    disruptor.publishEvent(translator);
+//                }
+//            } else {
+//                disruptor.publishEvent(translator);
+//            }
+//        } catch (final NullPointerException npe) {
+//            // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
+//            logWarningOnNpeFromDisruptorPublish(translator);
+//        }
     }
 
     void enqueueLogMessageWhenQueueFull(
@@ -309,7 +310,7 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
             }
         } catch (final NullPointerException npe) {
             // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
-            logWarningOnNpeFromDisruptorPublish(level, fqcn, msg, thrown);
+            logWarningOnNpeFromDisruptorPublish();
         }
     }
 
@@ -325,19 +326,10 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
     }
 
     private void logWarningOnNpeFromDisruptorPublish(final RingBufferLogEventTranslator translator) {
-        logWarningOnNpeFromDisruptorPublish(
-                translator.level, translator.loggerName, translator.message, translator.thrown);
+        logWarningOnNpeFromDisruptorPublish();
     }
 
-    private void logWarningOnNpeFromDisruptorPublish(
-            final Level level, final String fqcn, final Message msg, final Throwable thrown) {
-        LOGGER.warn(
-                "[{}] Ignoring log event after log4j was shut down: {} [{}] {}{}",
-                contextName,
-                level,
-                fqcn,
-                msg.getFormattedMessage(),
-                thrown == null ? "" : Throwables.toStringList(thrown));
+    private void logWarningOnNpeFromDisruptorPublish() {
     }
 
     /**
