@@ -5,6 +5,7 @@ import org.slf4j.helpers.MessageFormatter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 @Component
@@ -12,13 +13,13 @@ import java.util.Stack;
 public class Logger {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Logger.class);
 
-    private final Stack<InfoLoggerEvent> infoLogs;
+    private final ArrayList<InfoLoggerEvent> infoLogs;
 
     /**
      * No argument constructor for Logger.Class
      */
     public Logger() {
-        infoLogs = new Stack<>();
+        infoLogs = new ArrayList<>();
     }
 
     /**
@@ -28,14 +29,13 @@ public class Logger {
      * @param obj     - array of objects
      */
     public void info(String message, Object... obj) {
-//        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
-//        if (throwableCandidate != null) {
-//            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
-//            this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
-//        } else {
-//            this.infoLogs.push(new InfoLoggerEvent(message, obj));
-//        }
-        this.infoLogs.push(new InfoLoggerEvent(message, null));
+        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
+        if (throwableCandidate != null) {
+            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
+            this.infoLogs.add(new InfoLoggerEvent(message, trimmedCopy));
+        } else {
+            this.infoLogs.add(new InfoLoggerEvent(message, obj));
+        }
     }
 
     /**
@@ -73,7 +73,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void printInfo(String message, Object... obj) {
+    public void pInfo(String message, Object... obj) {
         LOGGER.info(message, obj);
     }
 
@@ -83,7 +83,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void printError(String message, Object... obj) {
+    public void pError(String message, Object... obj) {
         LOGGER.error(message, obj);
     }
 
@@ -93,7 +93,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void warn(String message, Object... obj) {
+    public void pWarn(String message, Object... obj) {
         LOGGER.warn(message, obj);
     }
 
@@ -103,7 +103,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void debug(String message, Object... obj) {
+    public void pDebug(String message, Object... obj) {
         LOGGER.debug(message, obj);
     }
 }
