@@ -35,9 +35,3 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Publish to the Github Repository
-        run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
