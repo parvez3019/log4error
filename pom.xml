@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.parvez3019</groupId>
     <artifactId>log4error</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.0.8a</version>
     <packaging>jar</packaging>
 
     <name>log4error</name>
