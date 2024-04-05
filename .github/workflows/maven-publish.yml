@@ -30,7 +30,7 @@ jobs:
             [{
                 "id": "central",
                 "username": "${{ secrets.USERNAME }}",
-                "password": "${{ secrets.SONATYPE_PASSWORD }}"
+                "password": "${{ secrets.PASSWORD }}"
             }]
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
