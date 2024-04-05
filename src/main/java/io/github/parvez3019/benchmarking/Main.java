@@ -8,9 +8,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 public class Main {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder().include(
-                Log4jBenchmark.class.getSimpleName()
+                Log4ErrorBenchmark.class.getSimpleName()
         ).build();
         new Runner(opt).run();
     }
-
 }

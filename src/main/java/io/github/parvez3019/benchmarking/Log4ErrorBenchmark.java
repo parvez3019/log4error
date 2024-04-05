@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 1)
 @Threads(8)
 public class Log4ErrorBenchmark {
-    private static final int LOG_COUNT = 100000;
+    private static final int LOG_COUNT = 1000;
     private Logger logger;
 
     @Setup
