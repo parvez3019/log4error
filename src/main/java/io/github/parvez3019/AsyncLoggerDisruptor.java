@@ -119,22 +119,10 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
                     }
                 };
         asyncQueueFullPolicy = AsyncQueueFullPolicyFactory.create();
-
         disruptor = new Disruptor<>(
                 RingBufferLogEvent.FACTORY, ringBufferSize, (Executor) threadFactory, ProducerType.MULTI, waitStrategy);
 
-//        final ExceptionHandler<RingBufferLogEvent> errorHandler = DisruptorUtil.getAsyncLoggerExceptionHandler();
-//        disruptor.setDefaultExceptionHandler(errorHandler);
 
-//        final EventHandler<RingBufferLogEvent> handler = createEventHandler();
-//        disruptor.handleEventsWith(handler);
-
-        LOGGER.debug(
-                "[{}] Starting AsyncLogger disruptor for this context with ringbufferSize={}, waitStrategy={}, "
-                        + "exceptionHandler={}...",
-                contextName,
-                disruptor.getRingBuffer().getBufferSize(),
-                waitStrategy.getClass().getSimpleName());
         disruptor.start();
 
         LOGGER.trace(
@@ -150,42 +138,6 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
      */
     @Override
     public boolean stop(final long timeout, final TimeUnit timeUnit) {
-        final Disruptor<RingBufferLogEvent> temp = getDisruptor();
-        if (temp == null) {
-            LOGGER.trace("[{}] AsyncLoggerDisruptor: disruptor for this context already shut down.", contextName);
-            return true; // disruptor was already shut down by another thread
-        }
-        setStopping();
-        LOGGER.debug("[{}] AsyncLoggerDisruptor: shutting down disruptor for this context.", contextName);
-
-        // We must guarantee that publishing to the RingBuffer has stopped before we call disruptor.shutdown().
-        disruptor = null; // client code fails with NPE if log after stop. This is by design.
-
-        // Calling Disruptor.shutdown() will wait until all enqueued events are fully processed,
-        // but this waiting happens in a busy-spin. To avoid (postpone) wasting CPU,
-        // we sleep in short chunks, up to 10 seconds, waiting for the ringbuffer to drain.
-        for (int i = 0; hasBacklog(temp) && i < MAX_DRAIN_ATTEMPTS_BEFORE_SHUTDOWN; i++) {
-            try {
-                Thread.sleep(SLEEP_MILLIS_BETWEEN_DRAIN_ATTEMPTS); // give up the CPU for a while
-            } catch (final InterruptedException e) { // ignored
-            }
-        }
-        try {
-            // busy-spins until all events currently in the disruptor have been processed, or timeout
-            temp.shutdown(timeout, timeUnit);
-        } catch (final TimeoutException e) {
-            LOGGER.warn("[{}] AsyncLoggerDisruptor: shutdown timed out after {} {}", contextName, timeout, timeUnit);
-            temp.halt(); // give up on remaining log events, if any
-        }
-
-        LOGGER.trace("[{}] AsyncLoggerDisruptor: disruptor has been shut down.", contextName);
-
-        if (DiscardingAsyncQueueFullPolicy.getDiscardCount(asyncQueueFullPolicy) > 0) {
-            LOGGER.trace(
-                    "AsyncLoggerDisruptor: {} discarded {} events.",
-                    asyncQueueFullPolicy,
-                    DiscardingAsyncQueueFullPolicy.getDiscardCount(asyncQueueFullPolicy));
-        }
         setStopped();
         return true;
     }
@@ -237,35 +189,34 @@ class AsyncLoggerDisruptor extends AbstractLifeCycle {
     }
 
     boolean tryPublish(final RingBufferLogEventTranslator translator) {
-//        try {
-            // Note: we deliberately access the volatile disruptor field afresh here.
-            // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
-            // was shut down, which could cause the publishEvent method to hang and never return.
-//            return disruptor.getRingBuffer().tryPublishEvent(translator);
-//        } catch (final NullPointerException npe) {
-            // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
-//            logWarningOnNpeFromDisruptorPublish(translator);
-//            return false;
-//        }
-        return true;
+        try {
+//             Note: we deliberately access the volatile disruptor field afresh here.
+//             Avoiding this and using an older reference could result in adding a log event to the disruptor after it
+//             was shut down, which could cause the publishEvent method to hang and never return.
+            return disruptor.getRingBuffer().tryPublishEvent(null);
+        } catch (final NullPointerException npe) {
+//             LOG4J2-639: catch NPE if disruptor field was set to null in stop()
+            logWarningOnNpeFromDisruptorPublish(translator);
+            return false;
+        }
     }
 
     void enqueueLogMessageWhenQueueFull(final RingBufferLogEventTranslator translator) {
-//        try {
-//            // Note: we deliberately access the volatile disruptor field afresh here.
-//            // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
-//            // was shut down, which could cause the publishEvent method to hang and never return.
-//            if (synchronizeEnqueueWhenQueueFull()) {
-//                synchronized (queueFullEnqueueLock) {
+        try {
+            // Note: we deliberately access the volatile disruptor field afresh here.
+            // Avoiding this and using an older reference could result in adding a log event to the disruptor after it
+            // was shut down, which could cause the publishEvent method to hang and never return.
+            if (synchronizeEnqueueWhenQueueFull()) {
+                synchronized (queueFullEnqueueLock) {
 //                    disruptor.publishEvent(translator);
-//                }
-//            } else {
+                }
+            } else {
 //                disruptor.publishEvent(translator);
-//            }
-//        } catch (final NullPointerException npe) {
-//            // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
-//            logWarningOnNpeFromDisruptorPublish(translator);
-//        }
+            }
+        } catch (final NullPointerException npe) {
+            // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
+            logWarningOnNpeFromDisruptorPublish(translator);
+        }
     }
 
     void enqueueLogMessageWhenQueueFull(
