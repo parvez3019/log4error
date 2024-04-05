@@ -5,20 +5,19 @@ import org.slf4j.helpers.MessageFormatter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 @Component
 @RequestScope
 public class Logger {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Logger.class);
-
-    private final Stack<InfoLoggerEvent> infoLogs;
+    private final ArrayList<InfoLoggerEvent> collectedLogs;
 
     /**
      * No argument constructor for Logger.Class
      */
     public Logger() {
-        infoLogs = new Stack<>();
+        collectedLogs = new ArrayList<>();
     }
 
     /**
@@ -28,13 +27,17 @@ public class Logger {
      * @param obj     - array of objects
      */
     public void info(String message, Object... obj) {
-        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
-        if (throwableCandidate != null) {
-            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
-            this.infoLogs.push(new InfoLoggerEvent(message, trimmedCopy));
-        } else {
-            this.infoLogs.push(new InfoLoggerEvent(message, obj));
-        }
+        collectLog(LoggerLevel.INFO, message, obj);
+    }
+
+    /**
+     * This method will be pushing debug logs in to a stack of string
+     *
+     * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
+     * @param obj     - array of objects
+     */
+    public void debug(String message, Object... obj) {
+        collectLog(LoggerLevel.DEBUG, message, obj);
     }
 
     /**
@@ -54,16 +57,14 @@ public class Logger {
      * Print info log stack
      */
     public void printInfoLogs() {
-        infoLogs.forEach(p -> {
-            LOGGER.info(p.getMessage(), p.getArgArray());
-        });
+        collectedLogs.forEach(Logger::printLog);
     }
 
     /**
      * Clear up the info log stack
      */
     public void clearInfoLogStack() {
-        infoLogs.clear();
+        collectedLogs.clear();
     }
 
     /**
@@ -72,7 +73,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void printInfo(String message, Object... obj) {
+    public void pInfo(String message, Object... obj) {
         LOGGER.info(message, obj);
     }
 
@@ -82,7 +83,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void printError(String message, Object... obj) {
+    public void pError(String message, Object... obj) {
         LOGGER.error(message, obj);
     }
 
@@ -92,7 +93,7 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void warn(String message, Object... obj) {
+    public void pWarn(String message, Object... obj) {
         LOGGER.warn(message, obj);
     }
 
@@ -102,7 +103,26 @@ public class Logger {
      * @param message takes the logs message in pattern format eg "Exception occurred :{}, at time: {}, ex, time.now()"
      * @param obj     - array of objects
      */
-    public static void debug(String message, Object... obj) {
+    public void pDebug(String message, Object... obj) {
         LOGGER.debug(message, obj);
+    }
+
+    private void collectLog(LoggerLevel level, String message, Object[] obj) {
+        Throwable throwableCandidate = MessageFormatter.getThrowableCandidate(obj);
+        if (throwableCandidate != null) {
+            Object[] trimmedCopy = MessageFormatter.trimmedCopy(obj);
+            this.collectedLogs.add(new InfoLoggerEvent(level, message, trimmedCopy));
+        } else {
+            this.collectedLogs.add(new InfoLoggerEvent(level, message, obj));
+        }
+    }
+
+    private static void printLog(InfoLoggerEvent p) {
+        if (p.level() == LoggerLevel.INFO) {
+            LOGGER.info(p.message(), p.argArray());
+        }
+        if (p.level() == LoggerLevel.DEBUG) {
+            LOGGER.debug(p.message(), p.argArray());
+        }
     }
 }

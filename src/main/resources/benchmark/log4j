@@ -1,0 +1,47 @@
+/Users/olx/Library/Java/JavaVirtualMachines/corretto-17.0.10/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=62497:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/olx/repos/Personal projects/log4error/target/classes:/Users/olx/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/Users/olx/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/olx/.m2/repository/org/springframework/spring-context/5.3.33/spring-context-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-aop/5.3.33/spring-aop-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-beans/5.3.33/spring-beans-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-core/5.3.33/spring-core-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-jcl/5.3.33/spring-jcl-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-expression/5.3.33/spring-expression-5.3.33.jar:/Users/olx/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/Users/olx/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.19/tomcat-annotations-api-10.1.19.jar:/Users/olx/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar:/Users/olx/.m2/repository/org/springframework/spring-web/6.1.5/spring-web-6.1.5.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-observation/1.12.4/micrometer-observation-1.12.4.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar:/Users/olx/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.1.1/maven-install-plugin-3.1.1.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-util/1.0.0.v20140518/aether-util-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-api/1.0.0.v20140518/aether-api-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/codehaus/plexus/plexus-utils/3.5.0/plexus-utils-3.5.0.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar:/Users/olx/.m2/repository/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/Users/olx/.m2/repository/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar io.github.parvez3019.benchmarking.Main
+# JMH version: 1.37
+# VM version: JDK 17.0.10, OpenJDK 64-Bit Server VM, 17.0.10+7-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-17.0.10/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=62497:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: io.github.parvez3019.benchmarking.Log4jBenchmark.log4jLoggerBenchmark
+
+# Run progress: 0.00% complete, ETA 00:00:07
+# Fork: 1 of 1
+# Warmup Iteration   1: 1382077.037 ±(99.9%) 81527.532 ns/op
+# Warmup Iteration   2: 1116879.173 ±(99.9%) 9002.133 ns/op
+Iteration   1: 1114791.781 ±(99.9%) 6969.770 ns/op
+Iteration   2: 1119622.030 ±(99.9%) 10488.452 ns/op
+Iteration   3: 1113661.253 ±(99.9%) 9337.341 ns/op
+Iteration   4: 1111657.652 ±(99.9%) 6125.758 ns/op
+Iteration   5: 1113551.931 ±(99.9%) 7935.256 ns/op
+
+
+Result "io.github.parvez3019.benchmarking.Log4jBenchmark.log4jLoggerBenchmark":
+  1114656.929 ±(99.9%) 11532.415 ns/op [Average]
+  (min, avg, max) = (1111657.652, 1114656.929, 1119622.030), stdev = 2994.932
+  CI (99.9%): [1103124.514, 1126189.345] (assumes normal distribution)
+
+# Run complete. Total time: 00:00:07
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                            Mode  Cnt        Score       Error  Units
+Log4jBenchmark.log4jLoggerBenchmark  avgt    5  1114656.929 ± 11532.415  ns/op
+
+Process finished with exit code 0
