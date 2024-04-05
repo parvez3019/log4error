@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.parvez3019</groupId>
     <artifactId>log4error</artifactId>
-    <version>0.0.8a</version>
+    <version>0.0.9</version>
     <packaging>jar</packaging>
 
     <name>log4error</name>
@@ -180,6 +180,6 @@
         <connection>scm:git:git://github.com/parvez3019/log4error.git</connection>
         <developerConnection>scm:git:ssh://github.com:parvez3019/log4error.git</developerConnection>
         <url>https://github.com/parvez3019/log4error.git</url>
-        <tag>0.0.8</tag>
+        <tag>0.0.9</tag>
     </scm>
 </project>
