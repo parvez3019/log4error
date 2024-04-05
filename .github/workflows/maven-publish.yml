@@ -21,18 +21,17 @@ jobs:
           server-password: ${{ secrets.PASSWORD }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
-#      - name: Publish to the Maven Central Repository
-#        run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.PASSWORD }}
-#          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Set up Java for publishing to GitHub Packages
-        uses: actions/setup-java@v4
+      - uses: s4u/maven-settings-action@v3.0.0
         with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy
+          servers: |
+            [{
+                "id": "central",
+                "username": "${{ secrets.USERNAME }}",
+                "password": "${{ secrets.PASSWORD }}"
+            }]
+      - name: Publish to the Maven Central Repository
+        run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
