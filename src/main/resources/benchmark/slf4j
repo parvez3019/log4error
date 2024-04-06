@@ -1,0 +1,259 @@
+/Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59764:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/olx/repos/Personal projects/log4error/target/classes:/Users/olx/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/Users/olx/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/olx/.m2/repository/org/springframework/spring-context/5.3.33/spring-context-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-aop/5.3.33/spring-aop-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-beans/5.3.33/spring-beans-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-core/5.3.33/spring-core-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-jcl/5.3.33/spring-jcl-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-expression/5.3.33/spring-expression-5.3.33.jar:/Users/olx/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/Users/olx/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.19/tomcat-annotations-api-10.1.19.jar:/Users/olx/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar:/Users/olx/.m2/repository/org/springframework/spring-web/6.1.5/spring-web-6.1.5.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-observation/1.12.4/micrometer-observation-1.12.4.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar:/Users/olx/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.1.1/maven-install-plugin-3.1.1.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-util/1.0.0.v20140518/aether-util-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-api/1.0.0.v20140518/aether-api-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/codehaus/plexus/plexus-utils/3.5.0/plexus-utils-3.5.0.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar:/Users/olx/.m2/repository/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/Users/olx/.m2/repository/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:/Users/olx/.m2/repository/com/lmax/disruptor/3.3.0/disruptor-3.3.0.jar io.github.parvez3019.benchmarking.Main
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59764:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark
+
+# Run progress: 0.00% complete, ETA 00:00:21
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+≈ 10⁻⁴ ops/ns
+# Warmup Iteration   2: 0.001 ops/ns
+Iteration   1: 0.001 ops/ns
+Iteration   2: 0.001 ops/ns
+Iteration   3: 0.001 ops/ns
+Iteration   4: 0.001 ops/ns
+Iteration   5: 0.001 ops/ns
+
+
+Result "io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark":
+  0.001 ±(99.9%) 0.001 ops/ns [Average]
+  (min, avg, max) = (0.001, 0.001, 0.001), stdev = 0.001
+  CI (99.9%): [0.001, 0.001] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59764:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark
+
+# Run progress: 33.32% complete, ETA 00:00:16
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+35230.489 ±(99.9%) 2619.982 ns/op
+# Warmup Iteration   2: 10633.894 ±(99.9%) 105.528 ns/op
+Iteration   1: 10858.714 ±(99.9%) 285.918 ns/op
+Iteration   2: 10922.674 ±(99.9%) 289.759 ns/op
+Iteration   3: 10583.924 ±(99.9%) 102.218 ns/op
+Iteration   4: 10921.842 ±(99.9%) 252.111 ns/op
+Iteration   5: 11017.185 ±(99.9%) 89.957 ns/op
+
+
+Result "io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark":
+  10860.868 ±(99.9%) 634.701 ns/op [Average]
+  (min, avg, max) = (10583.924, 10860.868, 11017.185), stdev = 164.830
+  CI (99.9%): [10226.167, 11495.569] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59764:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark
+
+# Run progress: 66.64% complete, ETA 00:00:08
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+46455.764 ±(99.9%) 3622.907 ns/op
+# Warmup Iteration   2: 13297.449 ±(99.9%) 585.770 ns/op
+Iteration   1: 12000.041 ±(99.9%) 355.609 ns/op
+                 p0.00:   8736.000 ns/op
+                 p0.50:   9280.000 ns/op
+                 p0.90:   9872.000 ns/op
+                 p0.95:   12448.000 ns/op
+                 p0.99:   41221.120 ns/op
+                 p0.999:  562446.336 ns/op
+                 p0.9999: 1733594.317 ns/op
+                 p1.00:   2240512.000 ns/op
+
+Iteration   2: 11689.270 ±(99.9%) 342.351 ns/op
+                 p0.00:   8784.000 ns/op
+                 p0.50:   9280.000 ns/op
+                 p0.90:   9664.000 ns/op
+                 p0.95:   12416.000 ns/op
+                 p0.99:   40192.000 ns/op
+                 p0.999:  361071.104 ns/op
+                 p0.9999: 1875973.120 ns/op
+                 p1.00:   3297280.000 ns/op
+
+Iteration   3: 11824.256 ±(99.9%) 347.167 ns/op
+                 p0.00:   8736.000 ns/op
+                 p0.50:   9280.000 ns/op
+                 p0.90:   10112.000 ns/op
+                 p0.95:   12320.000 ns/op
+                 p0.99:   41735.040 ns/op
+                 p0.999:  441150.464 ns/op
+                 p0.9999: 1689600.000 ns/op
+                 p1.00:   3665920.000 ns/op
+
+Iteration   4: 11078.967 ±(99.9%) 292.820 ns/op
+                 p0.00:   8656.000 ns/op
+                 p0.50:   9280.000 ns/op
+                 p0.90:   9488.000 ns/op
+                 p0.95:   11904.000 ns/op
+                 p0.99:   27360.000 ns/op
+                 p0.999:  185747.456 ns/op
+                 p0.9999: 1542261.965 ns/op
+                 p1.00:   1908736.000 ns/op
+
+Iteration   5: 11012.821 ±(99.9%) 286.501 ns/op
+                 p0.00:   8736.000 ns/op
+                 p0.50:   9280.000 ns/op
+                 p0.90:   9456.000 ns/op
+                 p0.95:   11488.000 ns/op
+                 p0.99:   27616.000 ns/op
+                 p0.999:  176774.144 ns/op
+                 p0.9999: 1592449.229 ns/op
+                 p1.00:   1861632.000 ns/op
+
+
+
+Result "io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark":
+  N = 957756
+  mean =  11515.379 ±(99.9%) 145.549 ns/op
+
+  Histogram, ns/op:
+    [      0.000,  250000.000) = 956658
+    [ 250000.000,  500000.000) = 261
+    [ 500000.000,  750000.000) = 57
+    [ 750000.000, 1000000.000) = 19
+    [1000000.000, 1250000.000) = 85
+    [1250000.000, 1500000.000) = 374
+    [1500000.000, 1750000.000) = 236
+    [1750000.000, 2000000.000) = 42
+    [2000000.000, 2250000.000) = 17
+    [2250000.000, 2500000.000) = 2
+    [2500000.000, 2750000.000) = 1
+    [2750000.000, 3000000.000) = 1
+    [3000000.000, 3250000.000) = 1
+    [3250000.000, 3500000.000) = 1
+    [3500000.000, 3750000.000) = 1
+
+  Percentiles, ns/op:
+      p(0.0000) =   8656.000 ns/op
+     p(50.0000) =   9280.000 ns/op
+     p(90.0000) =   9664.000 ns/op
+     p(95.0000) =  12112.000 ns/op
+     p(99.0000) =  37952.000 ns/op
+     p(99.9000) = 337408.000 ns/op
+     p(99.9900) = 1682326.733 ns/op
+     p(99.9990) = 2200646.820 ns/op
+     p(99.9999) = 3665920.000 ns/op
+    p(100.0000) = 3665920.000 ns/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59764:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads
+# Benchmark mode: Single shot invocation time
+# Benchmark: io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark
+
+# Run progress: 99.97% complete, ETA 00:00:00
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+51587245.000 ±(99.9%) 1969883.643 ns/op
+# Warmup Iteration   2: 7158963.375 ±(99.9%) 2966801.695 ns/op
+Iteration   1: 3667442.750 ±(99.9%) 1826751.628 ns/op
+Iteration   2: 2478916.625 ±(99.9%) 328745.167 ns/op
+Iteration   3: 638297.000 ±(99.9%) 557091.638 ns/op
+Iteration   4: 233864.625 ±(99.9%) 213994.688 ns/op
+Iteration   5: 227885.375 ±(99.9%) 66822.695 ns/op
+
+
+Result "io.github.parvez3019.benchmarking.SLF4jBenchmark.slf4jLoggerBenchmark":
+  N = 5
+  mean = 1449281.275 ±(99.9%) 5967606.895 ns/op
+
+  Histogram, ns/op:
+    [      0.000,  250000.000) = 2
+    [ 250000.000,  500000.000) = 0
+    [ 500000.000,  750000.000) = 1
+    [ 750000.000, 1000000.000) = 0
+    [1000000.000, 1250000.000) = 0
+    [1250000.000, 1500000.000) = 0
+    [1500000.000, 1750000.000) = 0
+    [1750000.000, 2000000.000) = 0
+    [2000000.000, 2250000.000) = 0
+    [2250000.000, 2500000.000) = 1
+    [2500000.000, 2750000.000) = 0
+    [2750000.000, 3000000.000) = 0
+    [3000000.000, 3250000.000) = 0
+    [3250000.000, 3500000.000) = 0
+    [3500000.000, 3750000.000) = 1
+
+  Percentiles, ns/op:
+      p(0.0000) = 227885.375 ns/op
+     p(50.0000) = 638297.000 ns/op
+     p(90.0000) = 3667442.750 ns/op
+     p(95.0000) = 3667442.750 ns/op
+     p(99.0000) = 3667442.750 ns/op
+     p(99.9000) = 3667442.750 ns/op
+     p(99.9900) = 3667442.750 ns/op
+     p(99.9990) = 3667442.750 ns/op
+     p(99.9999) = 3667442.750 ns/op
+    p(100.0000) = 3667442.750 ns/op
+
+
+# Run complete. Total time: 00:00:25
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                      Mode     Cnt        Score         Error   Units
+SLF4jBenchmark.slf4jLoggerBenchmark           thrpt       5        0.001 ±       0.001  ops/ns
+SLF4jBenchmark.slf4jLoggerBenchmark            avgt       5    10860.868 ±     634.701   ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark          sample  957756    11515.379 ±     145.549   ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.00    sample             8656.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.50    sample             9280.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.90    sample             9664.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.95    sample            12112.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.99    sample            37952.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.999   sample           337408.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p0.9999  sample          1682326.733                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark:p1.00    sample          3665920.000                 ns/op
+SLF4jBenchmark.slf4jLoggerBenchmark              ss       5  1449281.275 ± 5967606.895   ns/op
+
+Process finished with exit code 0

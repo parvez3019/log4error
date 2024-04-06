@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequestScope
 public class Logger {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Logger.class);
-    private final ArrayList<InfoLoggerEvent> collectedLogs;
+    private final List<InfoLoggerEvent> collectedLogs;
 
     /**
      * No argument constructor for Logger.Class

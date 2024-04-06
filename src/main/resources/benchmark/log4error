@@ -1,8 +1,38 @@
-/Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=50254:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/olx/repos/Personal projects/log4error/target/classes:/Users/olx/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/Users/olx/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/olx/.m2/repository/org/springframework/spring-context/5.3.33/spring-context-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-aop/5.3.33/spring-aop-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-beans/5.3.33/spring-beans-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-core/5.3.33/spring-core-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-jcl/5.3.33/spring-jcl-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-expression/5.3.33/spring-expression-5.3.33.jar:/Users/olx/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/Users/olx/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.19/tomcat-annotations-api-10.1.19.jar:/Users/olx/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar:/Users/olx/.m2/repository/org/springframework/spring-web/6.1.5/spring-web-6.1.5.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-observation/1.12.4/micrometer-observation-1.12.4.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar:/Users/olx/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.1.1/maven-install-plugin-3.1.1.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-util/1.0.0.v20140518/aether-util-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-api/1.0.0.v20140518/aether-api-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/codehaus/plexus/plexus-utils/3.5.0/plexus-utils-3.5.0.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar:/Users/olx/.m2/repository/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/Users/olx/.m2/repository/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:/Users/olx/.m2/repository/com/lmax/disruptor/3.3.0/disruptor-3.3.0.jar io.github.parvez3019.benchmarking.Main
+/Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59689:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/olx/repos/Personal projects/log4error/target/classes:/Users/olx/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/Users/olx/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/olx/.m2/repository/org/springframework/spring-context/5.3.33/spring-context-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-aop/5.3.33/spring-aop-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-beans/5.3.33/spring-beans-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-core/5.3.33/spring-core-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-jcl/5.3.33/spring-jcl-5.3.33.jar:/Users/olx/.m2/repository/org/springframework/spring-expression/5.3.33/spring-expression-5.3.33.jar:/Users/olx/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/Users/olx/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.19/tomcat-annotations-api-10.1.19.jar:/Users/olx/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar:/Users/olx/.m2/repository/org/springframework/spring-web/6.1.5/spring-web-6.1.5.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-observation/1.12.4/micrometer-observation-1.12.4.jar:/Users/olx/.m2/repository/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar:/Users/olx/.m2/repository/org/apache/maven/plugins/maven-install-plugin/3.1.1/maven-install-plugin-3.1.1.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-util/1.0.0.v20140518/aether-util-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/eclipse/aether/aether-api/1.0.0.v20140518/aether-api-1.0.0.v20140518.jar:/Users/olx/.m2/repository/org/codehaus/plexus/plexus-utils/3.5.0/plexus-utils-3.5.0.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/olx/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar:/Users/olx/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar:/Users/olx/.m2/repository/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/Users/olx/.m2/repository/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:/Users/olx/.m2/repository/com/lmax/disruptor/3.3.0/disruptor-3.3.0.jar io.github.parvez3019.benchmarking.Main
 # JMH version: 1.37
 # VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
 # VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
-# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=50254:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59689:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark
+
+# Run progress: 0.00% complete, ETA 00:00:21
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+≈ 10⁻⁵ ops/ns
+# Warmup Iteration   2: ≈ 10⁻⁵ ops/ns
+Iteration   1: ≈ 10⁻⁵ ops/ns
+Iteration   2: ≈ 10⁻⁵ ops/ns
+Iteration   3: ≈ 10⁻⁵ ops/ns
+Iteration   4: ≈ 10⁻⁵ ops/ns
+Iteration   5: ≈ 10⁻⁵ ops/ns
+
+
+Result "io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark":
+  ≈ 10⁻⁵ ops/ns
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59689:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 2 iterations, 1 s each
 # Measurement: 5 iterations, 1 s each
@@ -11,27 +41,184 @@
 # Benchmark mode: Average time, time/op
 # Benchmark: io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark
 
-# Run progress: 0.00% complete, ETA 00:00:07
+# Run progress: 33.32% complete, ETA 00:00:16
 # Fork: 1 of 1
 # Warmup Iteration   1: SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-669441.298 ±(99.9%) 47838.007 ns/op
-# Warmup Iteration   2: 623391.001 ±(99.9%) 43084.021 ns/op
-Iteration   1: 501773.477 ±(99.9%) 7473.049 ns/op
-Iteration   2: 457119.104 ±(99.9%) 20308.908 ns/op
-Iteration   3: 415702.260 ±(99.9%) 11425.685 ns/op
-Iteration   4: 581015.524 ±(99.9%) 56265.147 ns/op
-Iteration   5: 488808.274 ±(99.9%) 21121.025 ns/op
+701681.334 ±(99.9%) 46985.718 ns/op
+# Warmup Iteration   2: 561074.887 ±(99.9%) 79551.500 ns/op
+Iteration   1: 598555.711 ±(99.9%) 80733.771 ns/op
+Iteration   2: 512801.091 ±(99.9%) 9063.459 ns/op
+Iteration   3: 499979.804 ±(99.9%) 45251.076 ns/op
+Iteration   4: 512209.489 ±(99.9%) 14511.471 ns/op
+Iteration   5: 637797.167 ±(99.9%) 133538.413 ns/op
 
 
 Result "io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark":
-  488883.728 ±(99.9%) 235951.626 ns/op [Average]
-  (min, avg, max) = (415702.260, 488883.728, 581015.524), stdev = 61275.888
-  CI (99.9%): [252932.102, 724835.354] (assumes normal distribution)
+  552268.653 ±(99.9%) 238570.367 ns/op [Average]
+  (min, avg, max) = (499979.804, 552268.653, 637797.167), stdev = 61955.967
+  CI (99.9%): [313698.286, 790839.019] (assumes normal distribution)
 
 
-# Run complete. Total time: 00:00:08
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59689:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark
+
+# Run progress: 66.64% complete, ETA 00:00:08
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+642237.666 ±(99.9%) 59079.512 ns/op
+# Warmup Iteration   2: 582104.952 ±(99.9%) 80086.719 ns/op
+Iteration   1: 593921.228 ±(99.9%) 39835.784 ns/op
+                 p0.00:   14496.000 ns/op
+                 p0.50:   449024.000 ns/op
+                 p0.90:   761548.800 ns/op
+                 p0.95:   829440.000 ns/op
+                 p0.99:   1046200.320 ns/op
+                 p0.999:  32387923.968 ns/op
+                 p0.9999: 34838072.525 ns/op
+                 p1.00:   34930688.000 ns/op
+
+Iteration   2: 517026.284 ±(99.9%) 54567.040 ns/op
+                 p0.00:   14416.000 ns/op
+                 p0.50:   437248.000 ns/op
+                 p0.90:   493056.000 ns/op
+                 p0.95:   560640.000 ns/op
+                 p0.99:   981196.800 ns/op
+                 p0.999:  50366382.080 ns/op
+                 p0.9999: 73959342.080 ns/op
+                 p1.00:   74317824.000 ns/op
+
+Iteration   3: 512333.749 ±(99.9%) 56248.414 ns/op
+                 p0.00:   14080.000 ns/op
+                 p0.50:   394752.000 ns/op
+                 p0.90:   444928.000 ns/op
+                 p0.95:   465177.600 ns/op
+                 p0.99:   3186114.560 ns/op
+                 p0.999:  26233602.048 ns/op
+                 p0.9999: 92405760.000 ns/op
+                 p1.00:   92405760.000 ns/op
+
+Iteration   4: 439065.729 ±(99.9%) 10261.616 ns/op
+                 p0.00:   14208.000 ns/op
+                 p0.50:   430592.000 ns/op
+                 p0.90:   452096.000 ns/op
+                 p0.95:   461824.000 ns/op
+                 p0.99:   649656.320 ns/op
+                 p0.999:  5162721.280 ns/op
+                 p0.9999: 30116888.576 ns/op
+                 p1.00:   32964608.000 ns/op
+
+Iteration   5: 585034.591 ±(99.9%) 146330.770 ns/op
+                 p0.00:   14448.000 ns/op
+                 p0.50:   426496.000 ns/op
+                 p0.90:   515584.000 ns/op
+                 p0.95:   742400.000 ns/op
+                 p0.99:   2370109.440 ns/op
+                 p0.999:  17171202.048 ns/op
+                 p0.9999: 284056145.101 ns/op
+                 p1.00:   284164096.000 ns/op
+
+
+
+Result "io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark":
+  N = 75683
+  mean = 522467.650 ±(99.9%) 29754.120 ns/op
+
+  Histogram, ns/op:
+    [        0.000,  25000000.000) = 75613
+    [ 25000000.000,  50000000.000) = 40
+    [ 50000000.000,  75000000.000) = 16
+    [ 75000000.000, 100000000.000) = 9
+    [100000000.000, 125000000.000) = 0
+    [125000000.000, 150000000.000) = 0
+    [150000000.000, 175000000.000) = 0
+    [175000000.000, 200000000.000) = 3
+    [200000000.000, 225000000.000) = 0
+    [225000000.000, 250000000.000) = 0
+    [250000000.000, 275000000.000) = 0
+
+  Percentiles, ns/op:
+      p(0.0000) =  14080.000 ns/op
+     p(50.0000) = 431616.000 ns/op
+     p(90.0000) = 520192.000 ns/op
+     p(95.0000) = 696320.000 ns/op
+     p(99.0000) = 1367326.720 ns/op
+     p(99.9000) = 24177672.192 ns/op
+     p(99.9900) = 92405760.000 ns/op
+     p(99.9990) = 284164096.000 ns/op
+     p(99.9999) = 284164096.000 ns/op
+    p(100.0000) = 284164096.000 ns/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.2, OpenJDK 64-Bit Server VM, 21.0.2+13-LTS
+# VM invoker: /Users/olx/Library/Java/JavaVirtualMachines/corretto-21.0.2/Contents/Home/bin/java
+# VM options: -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=59689:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads
+# Benchmark mode: Single shot invocation time
+# Benchmark: io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark
+
+# Run progress: 99.97% complete, ETA 00:00:00
+# Fork: 1 of 1
+# Warmup Iteration   1: SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+51558343.625 ±(99.9%) 4844957.879 ns/op
+# Warmup Iteration   2: 13090161.375 ±(99.9%) 2757540.665 ns/op
+Iteration   1: 679172.000 ±(99.9%) 774267.375 ns/op
+Iteration   2: 456859.375 ±(99.9%) 168925.490 ns/op
+Iteration   3: 510468.875 ±(99.9%) 244801.280 ns/op
+Iteration   4: 490119.875 ±(99.9%) 71771.431 ns/op
+Iteration   5: 491375.000 ±(99.9%) 142847.452 ns/op
+
+
+Result "io.github.parvez3019.benchmarking.Log4ErrorBenchmark.customLoggerBenchmark":
+  N = 5
+  mean = 525599.025 ±(99.9%) 338817.137 ns/op
+
+  Histogram, ns/op:
+    [400000.000, 425000.000) = 0
+    [425000.000, 450000.000) = 0
+    [450000.000, 475000.000) = 1
+    [475000.000, 500000.000) = 2
+    [500000.000, 525000.000) = 1
+    [525000.000, 550000.000) = 0
+    [550000.000, 575000.000) = 0
+    [575000.000, 600000.000) = 0
+    [600000.000, 625000.000) = 0
+    [625000.000, 650000.000) = 0
+    [650000.000, 675000.000) = 0
+
+  Percentiles, ns/op:
+      p(0.0000) = 456859.375 ns/op
+     p(50.0000) = 491375.000 ns/op
+     p(90.0000) = 679172.000 ns/op
+     p(95.0000) = 679172.000 ns/op
+     p(99.0000) = 679172.000 ns/op
+     p(99.9000) = 679172.000 ns/op
+     p(99.9900) = 679172.000 ns/op
+     p(99.9990) = 679172.000 ns/op
+     p(99.9999) = 679172.000 ns/op
+    p(100.0000) = 679172.000 ns/op
+
+
+# Run complete. Total time: 00:00:26
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -45,7 +232,18 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark                                 Mode  Cnt       Score        Error  Units
-Log4ErrorBenchmark.customLoggerBenchmark  avgt    5  488883.728 ± 235951.626  ns/op
+Benchmark                                           Mode    Cnt          Score        Error   Units
+Log4ErrorBenchmark.customLoggerBenchmark           thrpt      5         ≈ 10⁻⁵               ops/ns
+Log4ErrorBenchmark.customLoggerBenchmark            avgt      5     552268.653 ± 238570.367   ns/op
+Log4ErrorBenchmark.customLoggerBenchmark          sample  75683     522467.650 ±  29754.120   ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.00    sample             14080.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.50    sample            431616.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.90    sample            520192.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.95    sample            696320.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.99    sample           1367326.720                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.999   sample          24177672.192                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p0.9999  sample          92405760.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark:p1.00    sample         284164096.000                ns/op
+Log4ErrorBenchmark.customLoggerBenchmark              ss      5     525599.025 ± 338817.137   ns/op
 
 Process finished with exit code 0
