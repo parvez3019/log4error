@@ -18,7 +18,7 @@ jobs:
       - name: Set up Java for publishing to maven build
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
       - name: Maven Clean Package
         run: mvn clean package
