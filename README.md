@@ -10,6 +10,9 @@ Contextual, logical, or debugging information is absent since you have disabled 
 
 ## With `log4error` library -
 - You can `COLLECT INFO LOGS` on the GO and `print` them to the console only when an `exception occurs`.
+- You can also collect debug logs for a request and print them only if some error occurs.
+- With this, you can minimize the logging (that includes I/O operation for printing to console or file) via skipping logging for happy flows.
+- And only perform I/O operation with bulk writing of logs in unhappy flows.
 
 ## How does it work? 
 - It keeps collecting info logs in an in-memory request scoped local thread.
@@ -26,7 +29,7 @@ Contextual, logical, or debugging information is absent since you have disabled 
 - And printing all info logs during error, there is an increase in time to process both usages.
 - To Improve - Collect logs into a bulk record and print all logs on the error with a single I/O operation.
 
-Thanks to Christian Hujer pointed out that "Your library is actually _improving_ performance, always, at least in the happy path. Appending a log entry to a linked list (or array list, who cares these days…) is much cheaper than writing a log entry out. The former will almost never require a system call (only if the JVM process needs more memory from the OS), the latter will always require a system call (write)."
+Thanks to Christian Hujer pointed out that "Your library is actually _improving_ performance, always, at least in the happy path. Appending a log entry to a linked list (or array list, who cares these days…) is much cheaper than writing a log entry out. The former will rarely require a system call (only if the JVM process needs more memory from the OS), the latter will always require a system call (write)."
 
 
 ```
@@ -48,7 +51,7 @@ log4error - Average log time was 42 ns
 - Check out `LoggerFilterExample.class` for reference.
 
 ### Logger.info()
-- Using the Logger().info(String message, Object... obj) method you can collect the info logs, across your application.
+- Using the Logger().info(String message, Object... obj) method you can collect the info logs, across the flow of a request.
 
 ```
   Logger().info(String message, Object... obj)
@@ -61,13 +64,22 @@ log4error - Average log time was 42 ns
 - Logger().error(String message, Object... obj);
 ```
 
-### Static log methods
-- For static log methods you can use the following methods -
+### Logger.debug()
+- Using the Logger().debug(String message, Object... obj) method you can collect the debug logs, across the flow of a request.
+
 ```
-  Logger.printInfo(String message, Object... obj)
-  Logger.printError(String message, Object... obj)
-  Logger.debug(String message, Object... obj)
-  Logger.warn(String message, Object... obj)
+  Logger().debug(String message, Object... obj)
+  example - Logger().debug("Here I am printing some logs with argument one: {} and arg 2 : {}", arg1, arg2)
+```
+
+
+### normal log methods for direct console printing
+- For directly printing to console log methods you can use the following methods -
+```
+  Logger.pInfo(String message, Object... obj)
+  Logger.pError(String message, Object... obj)
+  Logger.pDebug(String message, Object... obj)
+  Logger.pWarn(String message, Object... obj)
 ```
 
 # Installation
@@ -75,10 +87,6 @@ log4error - Average log time was 42 ns
 ## Maven Central Repository - [Link](https://central.sonatype.com/artifact/io.github.parvez3019/log4error)
 
 ### Add the following dependency to your pom.xml file
-
-
-Reference For GitHub token and dependency download - [Link](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages)
-
 Maven 
 ```
 <dependency>
