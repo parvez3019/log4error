@@ -11,7 +11,7 @@ import java.util.Collection;
 public class Main {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder().include(
-                SLF4jBenchmark.class.getSimpleName()
+                Log4ErrorBenchmark.class.getSimpleName()
         ).build();
         new Runner(opt).run();
     }

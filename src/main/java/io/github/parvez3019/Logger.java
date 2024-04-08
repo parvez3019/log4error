@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -18,7 +19,7 @@ public class Logger {
      * No argument constructor for Logger.Class
      */
     public Logger() {
-        collectedLogs = new ArrayList<>();
+        collectedLogs = new LinkedList<>();
     }
 
     /**
