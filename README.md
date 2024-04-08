@@ -92,23 +92,23 @@ Maven
 <dependency>
     <groupId>io.github.parvez3019</groupId>
     <artifactId>log4error</artifactId>
-    <version>0.0.10</version>
+    <version>0.0.11</version>
 </dependency>
 ```
 
 Gradle
 ```
-implementation group: 'io.github.parvez3019', name: 'log4error', version: '0.0.10'
+implementation group: 'io.github.parvez3019', name: 'log4error', version: '0.0.11'
 ```
 
 Gradle (short)
 ```
-implementation 'io.github.parvez3019:log4error:0.0.10'
+implementation 'io.github.parvez3019:log4error:0.0.11'
 ```
 
 Gradle (kotlin)
 ```
-implementation("io.github.parvez3019:log4error:0.0.10")
+implementation("io.github.parvez3019:log4error:0.0.11")
 ```
 
 
