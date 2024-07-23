@@ -39,8 +39,8 @@ public class LoggerFilterExample extends OncePerRequestFilter {
     /**
      * @return will return you the logger instance that can statically imported in your classes.
      */
-    public static Logger Logger() {
-        return requestLogInfoThreadLocal.getLogger();
+    public static org.slf4j.Logger Logger(Class<?> clazz) {
+        return  LoggerFactory.getLogger(clazz);
     }
 
 }
