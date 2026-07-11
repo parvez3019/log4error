@@ -138,6 +138,10 @@ Logger().pError("Always visible error");
 
 Message formatting uses SLF4J `{}` placeholders.
 
+## AI prompt: integrate & migrate
+
+Use the ready-to-paste agent prompt in [`INTEGRATE_AND_MIGRATE_PROMPT.md`](INTEGRATE_AND_MIGRATE_PROMPT.md) to add log4error to a project and migrate from SLF4J, Log4j, Logback, or `java.util.logging`.
+
 ## Performance
 
 Happy-path logging avoids I/O: entries are appended to an in-memory list instead of written out. That is typically cheaper than a system call per log line.
