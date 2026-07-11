@@ -1,0 +1,15 @@
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <!-- Discard INFO output so SLF4J still formats/appends without flooding the console -->
+    <appender name="NULL" class="ch.qos.logback.core.FileAppender">
+        <file>/dev/null</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="io.github.parvez3019" level="DEBUG"/>
+    <root level="INFO">
+        <appender-ref ref="NULL"/>
+    </root>
+</configuration>

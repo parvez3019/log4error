@@ -1,50 +1,44 @@
 package io.github.parvez3019;
 
-import org.springframework.stereotype.Component;
-
 /**
- * ThreadLocal Instance can be created with the help of this class, this provides a custom wrapper over
- * Logger and ThreadLocal
+ * ThreadLocal holder for a request-scoped {@link Logger}.
+ * Create one instance (e.g. in a servlet filter), {@link #set} at request start,
+ * and {@link #remove} in {@code finally}.
  */
-@Component
-public class LoggerThreadLocal extends ThreadLocal<Logger>{
+public class LoggerThreadLocal extends ThreadLocal<Logger> {
 
-    /**
-     * @return return TheadLocal instance variable
-     */
     @Override
     public Logger get() {
         return super.get();
     }
 
-    /**
-     * @param value the value to be stored in the current thread's copy of
-     *              this thread-local.
-     */
     @Override
     public void set(Logger value) {
         super.set(value);
     }
 
     /**
-     * Will clear Logger info stack and remove logger instance from ThreadLocal Object
+     * Clears the buffered log stack (if present) and removes the ThreadLocal value.
+     * Does not create a Logger when none is bound.
      */
     @Override
     public void remove() {
-        getLogger().clearInfoLogStack();
+        Logger logger = super.get();
+        if (logger != null) {
+            logger.clearInfoLogStack();
+        }
         super.remove();
     }
 
     /**
-     * @return an instance of Logger, if logger instance is null, then it will create a new instance,
-     * will set it to thread local context and returns it.
+     * @return the Logger for this thread, creating and binding one if absent
      */
     public Logger getLogger() {
-        if (super.get() == null) {
-            Logger logger = new Logger();
+        Logger logger = super.get();
+        if (logger == null) {
+            logger = new Logger();
             super.set(logger);
-            return logger;
         }
-        return super.get();
+        return logger;
     }
 }
