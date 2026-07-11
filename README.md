@@ -1,94 +1,51 @@
-# What is `log4error`?
+# log4error
 
-Organisations often turn off `INFO` level logs in production to reduce the logging cost.
-I have worked in many projects where teams have only enabled `ERROR` level logs in production.
+[![CI](https://github.com/parvez3019/log4error/actions/workflows/package-verify.yml/badge.svg)](https://github.com/parvez3019/log4error/actions/workflows/package-verify.yml)
+[![Java Version](https://img.shields.io/badge/java-17-blue.svg)](https://adoptium.net/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.parvez3019/log4error.svg)](https://central.sonatype.com/artifact/io.github.parvez3019/log4error)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-The problem with logging only an `ERROR` log is you don't get any other information at the time of any unexpected incident, just the limited info from the error logs and stack trace.
-Contextual, logical, or debugging information is absent since you have disabled info logs.
+Collect INFO and DEBUG logs in memory — and flush them only when an error occurs.
 
-## Detailed Article -  [Medium Link](https://medium.com/@pha3019/log4error-java-library-for-reduced-info-level-logging-5f1c29867fc4)
+In production, teams often disable INFO logging to cut cost and noise. That leaves you with an ERROR line and a stack trace when something breaks — and none of the request context that would help you debug it.
 
-## With `log4error` library -
-- You can `COLLECT INFO LOGS` on the GO and `print` them to the console only when an `exception occurs`.
-- You can also collect debug logs for a request and print them only if some error occurs.
-- With this, you can minimize the logging (that includes I/O operation for printing to console or file) via skipping logging for happy flows.
-- And only perform I/O operation with bulk writing of logs in unhappy flows.
+**log4error** keeps request-scoped INFO/DEBUG logs in a ThreadLocal buffer. Happy paths stay quiet (no I/O). On `error()`, the buffered context is printed with the error, then cleared.
 
-## How does it work? 
-- It keeps collecting info logs in an in-memory request scoped local thread.
-- When you print an error log at any statement, at the point it prints the complete info stack for reference.
-- That helps debug issues when they occur and reduces overall logging data.
+> Deep dive: [Medium article](https://medium.com/@pha3019/log4error-java-library-for-reduced-info-level-logging-5f1c29867fc4)
 
-## Performance Statistics -
+## Stack
 
-- Actual profiling hasn't been done yet (TBD).
-- Using this library we will be reducing total I/O operation as well.
-- For all happy flows we will not be making any system calls, we just be collecting logs on the go in an array.
+| Component | Details |
+|-----------|---------|
+| Language  | Java 17 |
+| Build     | Maven |
+| Logging   | SLF4J / Log4j 2 |
+| Framework | Spring (request-scoped filter) |
+| License   | Apache 2.0 |
 
-- There is going to be a performance difference for unhappy flows with the current implementation.
-- And printing all info logs during error, there is an increase in time to process both usages.
-- To Improve - Collect logs into a bulk record and print all logs on the error with a single I/O operation.
+## How it works
 
-Thanks to Christian Hujer pointed out that "Your library is actually _improving_ performance, always, at least in the happy path. Appending a log entry to a linked list (or array list, who cares these days…) is much cheaper than writing a log entry out. The former will rarely require a system call (only if the JVM process needs more memory from the OS), the latter will always require a system call (write)."
-
+1. A servlet filter creates a request-scoped `Logger` and stores it in a `ThreadLocal`.
+2. `info()` / `debug()` append messages to an in-memory list — no console or file I/O.
+3. `error()` prints the buffered logs, logs the error, then clears the buffer.
+4. The filter removes the ThreadLocal when the request finishes.
 
 ```
-RUN Suite of 10 sets while logging 10,000 times each time to get average performance -
-
-Info Logs -
-Log4j - Average log time was 15 ns
-log4error -  Average log time was 38 ns
-
-ERROR Logs - 
-Log4j - Average log time was 15 ns
-log4error - Average log time was 42 ns
+Request start
+    │
+    ├─ info("fetched user {}", id)     → buffered
+    ├─ debug("cache miss")             → buffered
+    ├─ info("calling payment API")     → buffered
+    │
+    ├─ happy path  → buffer discarded, nothing written
+    └─ error(...)  → flush buffer + error log → clear
 ```
 
-## How to use it -
+## Installation
 
-### Create a LoggerFilter
-- Create a `LoggerFilter.Class` for the initialization of Logger
-- Check out `LoggerFilterExample.class` for reference.
+**Maven**
 
-### Logger.info()
-- Using the Logger().info(String message, Object... obj) method you can collect the info logs, across the flow of a request.
-
-```
-  Logger().info(String message, Object... obj)
-  example - Logger().info("Here I am printing some logs with argument one: {} and arg 2 : {}", arg1, arg2)
-```
-
-### Logger.error()
-- Will print the complete info log stack until that point and will reset the info log stack to empty.
-```
-- Logger().error(String message, Object... obj);
-```
-
-### Logger.debug()
-- Using the Logger().debug(String message, Object... obj) method you can collect the debug logs, across the flow of a request.
-
-```
-  Logger().debug(String message, Object... obj)
-  example - Logger().debug("Here I am printing some logs with argument one: {} and arg 2 : {}", arg1, arg2)
-```
-
-
-### normal log methods for direct console printing
-- For directly printing to console log methods you can use the following methods -
-```
-  Logger.pInfo(String message, Object... obj)
-  Logger.pError(String message, Object... obj)
-  Logger.pDebug(String message, Object... obj)
-  Logger.pWarn(String message, Object... obj)
-```
-
-# Installation
-
-## Maven Central Repository - [Link](https://central.sonatype.com/artifact/io.github.parvez3019/log4error)
-
-### Add the following dependency to your pom.xml file
-Maven 
-```
+```xml
 <dependency>
     <groupId>io.github.parvez3019</groupId>
     <artifactId>log4error</artifactId>
@@ -96,24 +53,112 @@ Maven
 </dependency>
 ```
 
-Gradle
-```
-implementation group: 'io.github.parvez3019', name: 'log4error', version: '0.0.11'
-```
+**Gradle**
 
-Gradle (short)
-```
+```groovy
 implementation 'io.github.parvez3019:log4error:0.0.11'
 ```
 
-Gradle (kotlin)
-```
+**Gradle (Kotlin DSL)**
+
+```kotlin
 implementation("io.github.parvez3019:log4error:0.0.11")
 ```
 
+[Maven Central](https://central.sonatype.com/artifact/io.github.parvez3019/log4error)
 
-## Run the following command for installation
+## Quick start
+
+### 1. Register a request filter
+
+Initialize a `Logger` per request and expose it via a static accessor. See [`LoggerFilterExample`](src/main/java/io/github/parvez3019/example/LoggerFilterExample.java):
+
+```java
+@Component
+@Order(1)
+public class LoggerFilterExample extends OncePerRequestFilter {
+    private static final LoggerThreadLocal requestLogInfoThreadLocal = new LoggerThreadLocal();
+
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain) throws ServletException, IOException {
+        requestLogInfoThreadLocal.set(new Logger());
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            requestLogInfoThreadLocal.remove();
+        }
+    }
+
+    public static Logger Logger() {
+        return requestLogInfoThreadLocal.getLogger();
+    }
+}
 ```
+
+### 2. Collect context, flush on error
+
+```java
+import static io.github.parvez3019.example.LoggerFilterExample.Logger;
+
+Logger().info("Processing order {}", orderId);
+Logger().debug("Payment attempt {}", attempt);
+
+try {
+    paymentService.charge(order);
+} catch (Exception ex) {
+    // Prints buffered info/debug logs, then the error
+    Logger().error("Payment failed for order {}", orderId, ex);
+}
+```
+
+### 3. Log immediately when needed
+
+Use the `p*` methods to write straight to SLF4J without buffering:
+
+```java
+Logger().pInfo("Always visible info");
+Logger().pWarn("Always visible warn");
+Logger().pDebug("Always visible debug");
+Logger().pError("Always visible error");
+```
+
+## API
+
+| Method | Behavior |
+|--------|----------|
+| `info(msg, args...)` | Buffer an INFO message |
+| `debug(msg, args...)` | Buffer a DEBUG message |
+| `error(msg, args...)` | Flush buffer → log ERROR → clear buffer |
+| `pInfo` / `pDebug` / `pWarn` / `pError` | Pass-through to SLF4J (no buffering) |
+| `printInfoLogs()` | Flush buffer without clearing |
+| `clearInfoLogStack()` | Discard buffered logs |
+
+Message formatting uses SLF4J `{}` placeholders.
+
+## Performance
+
+Happy-path logging avoids I/O: entries are appended to an in-memory list instead of written out. That is typically cheaper than a system call per log line.
+
+Rough microbenchmark (10 sets × 10,000 calls):
+
+| Operation | Log4j | log4error |
+|-----------|-------|-----------|
+| INFO      | ~15 ns | ~38 ns (buffer only) |
+| ERROR     | ~15 ns | ~42 ns (flush + error) |
+
+Unhappy paths pay more because buffered context is flushed with the error. Formal profiling is still TBD.
+
+> Credit to Christian Hujer for noting that buffering improves the happy path: appending to a list rarely needs a syscall; writing a log line always does.
+
+## Build from source
+
+```bash
 mvn clean install
 ```
 
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE).
