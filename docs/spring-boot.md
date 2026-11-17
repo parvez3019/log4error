@@ -1,3 +1,7 @@
+---
+description: "Set up log4error in Spring Boot 3: starter properties, required logging levels, error handlers, background threads and testing."
+---
+
 # Spring Boot guide
 
 `log4error-spring-boot-starter` wires log4error into a Spring Boot 3.x **servlet** application (Spring MVC on Tomcat, Jetty or Undertow). Reactive (WebFlux) applications aren't supported yet ([#24](https://github.com/parvez3019/log4error/issues/24)).
@@ -131,7 +135,7 @@ Work started from a request on another thread doesn't see the request's buffer (
 
 ## Testing your app
 
-In `@SpringBootTest` + MockMvc tests, the filter runs as in production. To assert on flushed output, attach a Logback `ListAppender` to `io.github.parvez3019.Logger`. The starter's own [`Log4ErrorFilterIT`](../log4error-spring-boot-starter/src/test/java/io/github/parvez3019/spring/Log4ErrorFilterIT.java) shows the pattern.
+In `@SpringBootTest` + MockMvc tests, the filter runs as in production. To assert on flushed output, attach a Logback `ListAppender` to `io.github.parvez3019.Logger`. The starter's own [`Log4ErrorFilterIT`](https://github.com/parvez3019/log4error/blob/main/log4error-spring-boot-starter/src/test/java/io/github/parvez3019/spring/Log4ErrorFilterIT.java) shows the pattern.
 
 In plain unit tests without the filter, call `RequestLogger.clear()` in `@AfterEach` so state doesn't leak between tests that share a thread.
 
@@ -139,4 +143,4 @@ In plain unit tests without the filter, call `RequestLogger.clear()` in `@AfterE
 
 - [How it works](how-it-works.md): flush semantics, timestamps, memory
 - [Troubleshooting & FAQ](troubleshooting.md)
-- [Runnable demo](../examples/spring-boot-demo)
+- [Runnable demo](https://github.com/parvez3019/log4error/blob/main/examples/spring-boot-demo)

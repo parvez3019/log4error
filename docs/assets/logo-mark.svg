@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="log4error">
+  <title>log4error</title>
+  <rect x="6" y="9"  width="44" height="8" rx="4" fill="#cbd5e1"/>
+  <rect x="6" y="22" width="34" height="8" rx="4" fill="#cbd5e1"/>
+  <rect x="6" y="35" width="40" height="8" rx="4" fill="#cbd5e1"/>
+  <rect x="6" y="48" width="52" height="8" rx="4" fill="#ef4444"/>
+</svg>

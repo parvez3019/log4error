@@ -1,3 +1,7 @@
+---
+description: "A paste-ready AI prompt for Claude Code, Cursor or Copilot to add log4error and migrate SLF4J, Logback, Log4j or JUL logging."
+---
+
 # AI prompt: integrate & migrate to log4error
 
 Copy this prompt into Cursor, Claude, ChatGPT, or similar. Paste your project context (build file, logging setup, sample classes) with it.

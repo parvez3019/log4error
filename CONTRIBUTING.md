@@ -28,6 +28,14 @@ make demo        # run the demo on :8080
 make benchmark   # JMH benchmarks for core
 ```
 
+Docs site (optional): the pages in `docs/` are published to GitHub Pages by `.github/workflows/docs.yml`. To preview them locally:
+
+```bash
+pip install -r requirements-docs.txt
+mkdocs serve          # http://127.0.0.1:8000
+mkdocs build --strict # what CI runs: fails on broken links
+```
+
 Test conventions:
 
 - `*Test` classes are unit tests, run by Surefire.
