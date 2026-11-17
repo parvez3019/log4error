@@ -4,8 +4,9 @@ Copy this prompt into Cursor, Claude, ChatGPT, or similar. Paste your project co
 
 ---
 
-You are integrating the Java library `log4error` (`io.github.parvez3019:log4error:0.1.0`)
-into this project and migrating existing logging to it.
+You are integrating the Java library `log4error` into this project and migrating existing logging to it.
+- Spring Boot 3.x servlet apps: use `io.github.parvez3019:log4error-spring-boot-starter:0.2.0` (preferred).
+- Anything else: use the core `io.github.parvez3019:log4error:0.2.0` plus a request filter.
 
 ## Goal
 
@@ -17,15 +18,26 @@ On error, flush buffered context with the error log.
 - `info()` / `debug()` → buffer in a request-scoped ThreadLocal (no I/O)
 - `error()` → print buffered logs, then log ERROR, then clear the buffer
 - `pInfo()` / `pDebug()` / `pWarn()` / `pError()` → immediate SLF4J pass-through (no buffering)
-- Requires a servlet filter that creates/clears a `Logger` per request
-  (see `examples/LoggerFilterExample.java` / `LoggerThreadLocal`)
+- Needs a per-request lifecycle that creates and clears a `Logger`:
+  - Spring Boot: the starter auto-registers `Log4ErrorFilter`; call sites use `RequestLogger.get()`
+  - Other servlet apps: copy `examples/LoggerFilterExample.java` (uses `LoggerThreadLocal`)
 - Default buffer cap is 500; oldest events drop with a one-time WARN
 - Optional: `Logger.of(MyService.class)` to preserve call-site logger names
 - Core JAR depends only on `slf4j-api` (no Spring on the classpath unless you add it)
 
 ## Integration steps
 
-1. Add the Maven/Gradle dependency for `io.github.parvez3019:log4error:0.1.0`.
+### Spring Boot (preferred)
+
+1. Add `io.github.parvez3019:log4error-spring-boot-starter:0.2.0`. Do not write a filter; the starter registers one.
+2. Use `RequestLogger.get()` at call sites (`import io.github.parvez3019.spring.RequestLogger;`).
+3. Optional: set `log4error.buffer-size`, `log4error.request-id-header`, `log4error.mdc-key` in `application.yml`,
+   and add `%X{x-request-id}` to the log pattern.
+4. In the migration table below, read `Logger()` as `RequestLogger.get()`.
+
+### Other servlet apps
+
+1. Add the Maven/Gradle dependency for `io.github.parvez3019:log4error:0.2.0`.
 2. Add a Spring `OncePerRequestFilter` (or plain `Filter`) that:
    - `set(new Logger())` or `set(Logger.of(SomeClass.class))` on the request ThreadLocal at start
    - `remove()` in `finally` (prevents leaks on pooled threads)
@@ -64,13 +76,13 @@ On error, flush buffered context with the error log.
 - On catch blocks that currently only `log.error`, switch to `Logger().error` so buffered context flushes.
 - Preserve `{}` placeholders and throwable-last argument style.
 - After migration, happy-path requests should not emit the buffered INFO/DEBUG lines.
-- Update imports: remove unused `LoggerFactory` where fully migrated; add static import of `Logger()` from the filter class.
+- Update imports: remove unused `LoggerFactory` where fully migrated; add `RequestLogger` (Boot) or a static import of `Logger()` from the filter class.
 - If the app is not Spring MVC/servlet style, adapt the ThreadLocal lifecycle to the framework’s request/job boundary.
 - Leave a short comment at the filter explaining why ThreadLocal must be cleared.
 
 ## Deliverables
 
 1. Dependency change
-2. Filter (or lifecycle hook) + static accessor
+2. Starter dependency (Boot) or filter/lifecycle hook + static accessor
 3. Migrated call sites with the mapping above
 4. Brief summary of files touched and any logs intentionally left on the old logger

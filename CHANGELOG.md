@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-17
+
+Spring Boot starter release. The core artifact `io.github.parvez3019:log4error` keeps its coordinates and API, so no migration is needed.
+
+### Added
+- `log4error-spring-boot-starter`: auto-registers `Log4ErrorFilter` in Spring Boot 3.x servlet apps
+  - `RequestLogger.get()` static accessor for the request-scoped `Logger`
+  - `log4error.*` properties: `enabled`, `buffer-size`, `request-id-header`, `mdc-key`, `filter-order`
+  - Backs off when `log4error.enabled=false` or when you declare your own `Log4ErrorFilter` bean
+- Runnable demo app in [`examples/spring-boot-demo`](examples/spring-boot-demo) (`make demo`)
+- `CONTRIBUTING.md`, issue templates and a pull request template
+
+### Changed
+- Build is now multi-module: `log4error-parent` (POM), `log4error` (core), `log4error-spring-boot-starter`
+- Compiler runs with `-parameters`
+- README rewritten with a before/after example, Spring Boot quick start, and a "Why not just…?" section
+- Integrate & migrate AI prompt now prefers the starter for Spring Boot apps
+
 ## [0.1.0] - 2026-07-11
 
 Major cleanup release. See [Upgrade guide: 0.0.x → 0.1.0](docs/upgrade-0.1.0.md).
@@ -110,7 +128,8 @@ Major cleanup release. See [Upgrade guide: 0.0.x → 0.1.0](docs/upgrade-0.1.0.m
 ### Notes
 - Early Maven Central / GPG publishing iterations for the library
 
-[Unreleased]: https://github.com/parvez3019/log4error/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/parvez3019/log4error/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/parvez3019/log4error/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/parvez3019/log4error/compare/0.0.11...0.1.0
 [0.0.11]: https://github.com/parvez3019/log4error/compare/0.0.10...0.0.11
 [0.0.10]: https://github.com/parvez3019/log4error/compare/0.0.9...0.0.10

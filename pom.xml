@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.parvez3019</groupId>
-    <artifactId>log4error</artifactId>
-    <version>0.1.0</version>
-    <packaging>jar</packaging>
+    <artifactId>log4error-parent</artifactId>
+    <version>0.2.0</version>
+    <packaging>pom</packaging>
 
-    <name>log4error</name>
-    <description>log4error buffers INFO/DEBUG logs in memory and flushes them only when an error occurs</description>
+    <name>log4error-parent</name>
+    <description>Parent POM for log4error: fingers-crossed logging for Java (buffer INFO/DEBUG per request, flush only on error)</description>
     <url>https://github.com/parvez3019/log4error</url>
 
     <licenses>
@@ -18,6 +18,27 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <name>Parvez Hassan</name>
+            <email>pha3019@gmail.com</email>
+            <organization>io.github.parvez3019</organization>
+            <organizationUrl>https://github.com/parvez3019</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/parvez3019/log4error.git</connection>
+        <developerConnection>scm:git:ssh://github.com:parvez3019/log4error.git</developerConnection>
+        <url>https://github.com/parvez3019/log4error.git</url>
+        <tag>0.2.0</tag>
+    </scm>
+
+    <modules>
+        <module>log4error</module>
+        <module>log4error-spring-boot-starter</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
@@ -35,116 +56,55 @@
         <junit.version>5.10.2</junit.version>
         <logback.version>1.5.6</logback.version>
         <spring.version>6.1.5</spring.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
         <jmh.version>1.37</jmh.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <!-- Test -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>${jakarta.servlet.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>${jmh.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>${jmh.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <release>${maven.compiler.release}</release>
+                        <!-- Spring resolves @PathVariable/@RequestParam names from bytecode -->
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <release>${maven.compiler.release}</release>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default-testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>org.openjdk.jmh</groupId>
-                                    <artifactId>jmh-generator-annprocess</artifactId>
-                                    <version>${jmh.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <failIfNoTests>true</failIfNoTests>
-                    <excludes>
-                        <exclude>**/benchmarking/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.3.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin.version}</version>
-                <configuration>
-                    <failIfNoTests>true</failIfNoTests>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
@@ -159,6 +119,21 @@
     </build>
 
     <profiles>
+        <!--
+            Runnable examples are built by default but never published.
+            The release workflow passes -DskipExamples so only parent, core and starter are deployed.
+        -->
+        <profile>
+            <id>examples</id>
+            <activation>
+                <property>
+                    <name>!skipExamples</name>
+                </property>
+            </activation>
+            <modules>
+                <module>examples/spring-boot-demo</module>
+            </modules>
+        </profile>
         <profile>
             <id>release</id>
             <build>
@@ -216,20 +191,4 @@
             </build>
         </profile>
     </profiles>
-
-    <developers>
-        <developer>
-            <name>Parvez Hassan</name>
-            <email>pha3019@gmail.com</email>
-            <organization>io.github.parvez3019</organization>
-            <organizationUrl>https://github.com/parvez3019</organizationUrl>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/parvez3019/log4error.git</connection>
-        <developerConnection>scm:git:ssh://github.com:parvez3019/log4error.git</developerConnection>
-        <url>https://github.com/parvez3019/log4error.git</url>
-        <tag>0.1.0</tag>
-    </scm>
 </project>
