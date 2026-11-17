@@ -1,3 +1,7 @@
+---
+description: "Upgrade log4error from 0.0.x to 0.1.0: breaking changes, dependency changes and migration checklist."
+---
+
 # Upgrade guide: 0.0.x → 0.1.0
 
 This guide covers upgrading from **log4error 0.0.11** (and earlier 0.0.x tags) to **0.1.0**.
@@ -28,7 +32,7 @@ implementation 'io.github.parvez3019:log4error:0.1.0'
 |------|-------|-------|------------------|
 | Spring DI | `Logger` / `LoggerThreadLocal` had `@Component` / `@RequestScope` | Annotations removed | Stop `@Autowired` / injecting `Logger`; use filter + ThreadLocal |
 | Transitive deps | Spring, Tomcat, javax.servlet, Log4j, etc. came with the JAR | Compile dep is **`slf4j-api` only** | Declare Spring Web / `jakarta.servlet-api` (and your SLF4J backend) yourself |
-| Example filter | `io.github.parvez3019.example.LoggerFilterExample` in the JAR | Not packaged; lives in repo [`examples/`](../examples/) | Copy the example into your app (or keep your own filter) |
+| Example filter | `io.github.parvez3019.example.LoggerFilterExample` in the JAR | Not packaged; lives in repo [`examples/`](https://github.com/parvez3019/log4error/blob/main/examples/) | Copy the example into your app (or keep your own filter) |
 | `InfoLoggerEvent` | `(level, message, argArray)` | Adds `throwable` component | Recompile if you construct or pattern-match the record |
 | Buffer size | Unbounded | Default cap **500**; oldest dropped + one WARN | Raise cap via `new Logger(maxSize)` if you need more breadcrumbs |
 | Call-site logger name | Always `io.github.parvez3019.Logger` | Optional `Logger.of(MyClass.class)` | Optional improvement; `new Logger()` still works |
@@ -68,7 +72,7 @@ Logger().info("...");
 Logger().error("...", ex);
 ```
 
-Copy [`examples/LoggerFilterExample.java`](../examples/LoggerFilterExample.java) if you need a starting point.
+Copy [`examples/LoggerFilterExample.java`](https://github.com/parvez3019/log4error/blob/main/examples/LoggerFilterExample.java) if you need a starting point.
 
 ### B. Add dependencies your app actually uses
 
@@ -129,6 +133,6 @@ requestLogInfoThreadLocal.set(new Logger(2000));
 
 ## 6. Further reading
 
-- [Changelog](../CHANGELOG.md)
-- [README](../README.md)
+- [Changelog](https://github.com/parvez3019/log4error/blob/main/CHANGELOG.md)
+- [README](index.md)
 - [Integrate & migrate prompt](INTEGRATE_AND_MIGRATE_PROMPT.md)

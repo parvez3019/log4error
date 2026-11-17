@@ -1,3 +1,7 @@
+---
+description: "Upgrade log4error to 0.2.0: no breaking changes, and how to switch a copied servlet filter to the Spring Boot starter."
+---
+
 # Upgrade guide: 0.1.x → 0.2.0
 
 0.2.0 has **no breaking changes**. The core artifact `io.github.parvez3019:log4error` keeps its coordinates and API. The new piece is an optional Spring Boot starter.

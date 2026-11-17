@@ -1,3 +1,7 @@
+---
+description: "How log4error buffers request-scoped INFO/DEBUG logs and flushes them on error: lifecycle, flush semantics, timestamps, memory and threading."
+---
+
 # How log4error works
 
 This page describes exactly what log4error does with each call, so you can predict its output and its cost.

@@ -1,0 +1,84 @@
+site_name: log4error
+site_url: https://parvez3019.github.io/log4error/
+site_description: >-
+  Fingers-crossed logging for Java: buffer INFO/DEBUG logs per request and write them only
+  when an error occurs. SLF4J library with a Spring Boot starter.
+site_author: Parvez Hassan
+repo_url: https://github.com/parvez3019/log4error
+repo_name: parvez3019/log4error
+edit_uri: edit/main/docs/
+copyright: Apache License 2.0
+
+docs_dir: docs
+# Not part of the site: GitHub-only docs index (index.md is the site home) and launch drafts.
+exclude_docs: |
+  README.md
+  launch/
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/logo-mark.svg
+  favicon: assets/logo-mark.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - content.tabs.link
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/parvez3019/log4error
+    - icon: fontawesome/brands/java
+      link: https://central.sonatype.com/artifact/io.github.parvez3019/log4error
+
+nav:
+  - Home: index.md
+  - Guides:
+      - Spring Boot: spring-boot.md
+      - How it works: how-it-works.md
+      - Troubleshooting & FAQ: troubleshooting.md
+  - Background:
+      - When to use it & comparison: comparison.md
+      - Performance: performance.md
+  - Upgrading:
+      - Upgrade to 0.2.0: upgrade-0.2.0.md
+      - Upgrade to 0.1.0: upgrade-0.1.0.md
+  - AI prompt (integrate & migrate): INTEGRATE_AND_MIGRATE_PROMPT.md

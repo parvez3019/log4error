@@ -8,9 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Documentation website at https://parvez3019.github.io/log4error/ (MkDocs Material, deployed by `.github/workflows/docs.yml`), with per-page meta descriptions, a sitemap and social preview tags
+- Docs: [When to use it & comparison](docs/comparison.md), [Performance](docs/performance.md)
+- Light and dark logo (`docs/assets/logo.svg`, `logo-dark.svg`)
 - Docs: [Spring Boot guide](docs/spring-boot.md), [How it works](docs/how-it-works.md), [Troubleshooting & FAQ](docs/troubleshooting.md), [Upgrade to 0.2.0](docs/upgrade-0.2.0.md)
 
 ### Changed
+- README restyled: centered logo, badges and nav links, "Why log4error?" list, 5-minute demo quickstart, Tech stack table
+- Build: `central-publishing-maven-plugin` 0.4.0 → 0.12.0. 0.4.0 crashed reading Central's validation response (`Unrecognized field "warnings"`), which failed the 0.2.0 publish job after the upload
 - README now states that the backend must allow INFO/DEBUG for the flushing logger (otherwise flushed context is dropped), and adds a contents line, a "When to use it" section, and a Limits list
 
 ## [0.2.0] - 2026-11-17

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="160" viewBox="0 0 560 160" role="img" aria-label="log4error">
+  <title>log4error</title>
+  <!-- buffered lines (held in memory) -->
+  <rect x="16" y="28"  width="104" height="16" rx="8" fill="#64748b" opacity="0.55"/>
+  <rect x="16" y="56"  width="84"  height="16" rx="8" fill="#64748b" opacity="0.55"/>
+  <rect x="16" y="84"  width="96"  height="16" rx="8" fill="#64748b" opacity="0.55"/>
+  <!-- the error that flushes them -->
+  <rect x="16" y="112" width="120" height="16" rx="8" fill="#ef4444"/>
+  <path d="M146 24 L146 132" stroke="#64748b" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <text x="172" y="106" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="84" font-weight="700" fill="#f1f5f9" letter-spacing="-1">log<tspan fill="#ef4444">4</tspan>error</text>
+</svg>

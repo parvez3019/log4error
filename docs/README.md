@@ -1,5 +1,7 @@
 # Docs
 
+These pages are published as a website at **https://parvez3019.github.io/log4error/** (built with MkDocs from this folder; see `mkdocs.yml`).
+
 **Start here:** the [README](../README.md) quick start, then the [Spring Boot guide](spring-boot.md).
 
 ## Guides
@@ -7,6 +9,8 @@
 | Document | Description |
 |----------|-------------|
 | [Spring Boot guide](spring-boot.md) | Starter install, properties, required logging levels, replacing the filter, background threads, testing |
+| [When to use it & comparison](comparison.md) | Good fit / not a fit, alternatives, prior art |
+| [Performance](performance.md) | JMH benchmarks |
 | [How it works](how-it-works.md) | Request lifecycle, exact flush semantics, timestamps, buffer cap and memory, threading |
 | [Troubleshooting & FAQ](troubleshooting.md) | "Only the ERROR is printed", missing request IDs, buffer-cap warnings, backend support |
 

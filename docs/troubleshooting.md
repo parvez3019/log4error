@@ -1,3 +1,7 @@
+---
+description: "Fix common log4error issues: only the ERROR is printed, missing request IDs, buffer-cap warnings, backend and WebFlux support."
+---
+
 # Troubleshooting & FAQ
 
 ## Only the ERROR line is printed, not the buffered context

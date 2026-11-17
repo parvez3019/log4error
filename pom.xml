@@ -108,11 +108,11 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.4.0</version>
+                <!-- 0.4.0 crashed parsing Central's newer validation response ("warnings" field) -->
+                <version>0.12.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>
-                    <tokenAuth>true</tokenAuth>
                 </configuration>
             </plugin>
         </plugins>
