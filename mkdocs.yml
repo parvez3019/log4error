@@ -63,6 +63,8 @@ markdown_extensions:
       alternate_style: true
 
 extra:
+  # Google Search Console "HTML tag" verification: paste only the content="..." value.
+  google_site_verification: ""
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/parvez3019/log4error

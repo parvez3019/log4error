@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
+  {% if config.extra.google_site_verification %}
+  <meta name="google-site-verification" content="{{ config.extra.google_site_verification }}">
+  {% endif %}
   {% set title = config.site_name %}
   {% if page and page.meta and page.meta.title %}
     {% set title = page.meta.title ~ " · " ~ config.site_name %}
