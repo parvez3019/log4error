@@ -6,8 +6,7 @@ hide:
 ---
 
 <p align="center">
-  <img src="assets/logo.svg#only-light" alt="log4error" width="360">
-  <img src="assets/logo-dark.svg#only-dark" alt="log4error" width="360">
+  <img src="assets/logo.svg" alt="log4error" width="360">
 </p>
 
 # Fingers-crossed logging for Java
