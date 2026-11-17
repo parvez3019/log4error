@@ -2,6 +2,9 @@ name: Publish package to the Maven Central Repository and GitHub Packages
 on:
   release:
     types: [created]
+  # Manual (re-)publish of the version in pom.xml from a chosen branch/tag,
+  # e.g. when a release-triggered run failed after upload.
+  workflow_dispatch:
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -30,7 +33,7 @@ jobs:
                 "password": "${{ secrets.PASSWORD }}"
             }]
       - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode -Prelease -DskipExamples -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
+        run: mvn --batch-mode -Prelease -DskipExamples -DautoPublish=true -DwaitUntil=published -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy
         env:
           MAVEN_USERNAME: ${{ secrets.USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.PASSWORD }}
