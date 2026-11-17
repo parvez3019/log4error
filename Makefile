@@ -1,4 +1,4 @@
-.PHONY: help setup clean test test-it verify package install benchmark
+.PHONY: help setup clean test test-it verify package install benchmark demo
 
 MVN ?= mvn
 MVN_FLAGS := -B -Dgpg.skip=true
@@ -12,7 +12,8 @@ help:
 	@echo "  make verify     - clean + unit + integration tests"
 	@echo "  make package    - Package JAR (skip tests)"
 	@echo "  make install    - Install to local Maven repo"
-	@echo "  make benchmark  - Run JMH benchmarks"
+	@echo "  make benchmark  - Run JMH benchmarks (core module)"
+	@echo "  make demo       - Build and run the Spring Boot demo on :8080"
 
 setup:
 	@java -version 2>&1 | head -n 1
@@ -40,7 +41,11 @@ install:
 	$(MVN) $(MVN_FLAGS) install
 
 benchmark:
-	$(MVN) $(MVN_FLAGS) clean test-compile exec:java \
+	$(MVN) $(MVN_FLAGS) -pl log4error clean test-compile exec:java \
 		-DskipTests -DskipITs \
 		-Dexec.classpathScope=test \
 		-Dexec.mainClass=io.github.parvez3019.benchmarking.Main
+
+demo:
+	$(MVN) $(MVN_FLAGS) -pl examples/spring-boot-demo -am package -DskipTests
+	java -jar examples/spring-boot-demo/target/log4error-spring-boot-demo-*.jar

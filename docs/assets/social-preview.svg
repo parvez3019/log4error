@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#0f172a"/>
+  <text x="80" y="130" font-family="Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#f8fafc">log4error</text>
+  <text x="80" y="190" font-family="Helvetica, Arial, sans-serif" font-size="34" fill="#cbd5e1">Fingers-crossed logging for Java · SLF4J · Spring Boot</text>
+
+  <!-- Happy path -->
+  <rect x="80" y="250" width="530" height="290" rx="16" fill="#111c33" stroke="#22c55e" stroke-width="3"/>
+  <text x="110" y="300" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#22c55e">Request succeeds</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="22" fill="#64748b">
+    <text x="110" y="350" text-decoration="line-through">INFO  fetching order 8812</text>
+    <text x="110" y="385" text-decoration="line-through">DEBUG cache miss</text>
+    <text x="110" y="420" text-decoration="line-through">INFO  calling payment API</text>
+  </g>
+  <text x="110" y="495" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#f8fafc">→ buffer discarded, 0 lines written</text>
+
+  <!-- Error path -->
+  <rect x="670" y="250" width="530" height="290" rx="16" fill="#111c33" stroke="#f87171" stroke-width="3"/>
+  <text x="700" y="300" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#f87171">Request fails</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="22" fill="#e2e8f0">
+    <text x="700" y="350">INFO  fetching order 8812</text>
+    <text x="700" y="385">DEBUG cache miss</text>
+    <text x="700" y="420">INFO  calling payment API</text>
+    <text x="700" y="455" fill="#f87171">ERROR payment failed</text>
+  </g>
+  <text x="700" y="510" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#f8fafc">→ full context flushed with error</text>
+
+  <text x="80" y="600" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#94a3b8">github.com/parvez3019/log4error</text>
+  <text x="1200" y="600" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#94a3b8">~250× cheaper happy path</text>
+</svg>

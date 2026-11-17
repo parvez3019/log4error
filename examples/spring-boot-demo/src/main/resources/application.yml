@@ -1,0 +1,10 @@
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%X{x-request-id:-}] %logger{20} - %msg%n"
+  level:
+    # Production-style config: INFO is off for the app, log4error decides what to flush.
+    root: WARN
+    io.github.parvez3019: DEBUG
+
+log4error:
+  buffer-size: 500

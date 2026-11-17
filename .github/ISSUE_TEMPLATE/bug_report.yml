@@ -1,0 +1,38 @@
+name: Bug report
+description: Something doesn't work as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: A minimal snippet or repo. Include how the Logger is bound (starter, filter, other).
+      render: java
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      render: text
+  - type: input
+    id: log4error
+    attributes:
+      label: log4error version and artifact
+      placeholder: "log4error-spring-boot-starter 0.2.0"
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Java / Spring Boot / logging backend versions
+      placeholder: "Java 21, Spring Boot 3.3.5, Logback 1.5.11"
+    validations:
+      required: true

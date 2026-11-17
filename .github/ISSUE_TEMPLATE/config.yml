@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & usage help
+    url: https://github.com/parvez3019/log4error/discussions/categories/q-a
+    about: Ask how to use log4error in your setup.
+  - name: Show and tell
+    url: https://github.com/parvez3019/log4error/discussions/categories/show-and-tell
+    about: Share how you use log4error.
+  - name: Security vulnerability
+    url: https://github.com/parvez3019/log4error/security/policy
+    about: Please report security issues privately.
