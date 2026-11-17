@@ -15,11 +15,13 @@ In production, teams often turn INFO logging off to cut cost and noise. When som
 - **Successful requests write nothing.** The buffer is discarded, so there's no I/O and no log-ingestion cost.
 - **Failed requests write the full trail.** On `error()`, the buffered lines are flushed together with the error, tagged with the request ID.
 
+**Contents:** [Before / after](#before--after) · [Quick start: Spring Boot](#quick-start-spring-boot) · [Quick start: other apps](#quick-start-plain-servlet-and-non-boot-apps) · [API](#api) · [Performance](#performance) · [When to use it](#when-to-use-it) · [Limits](#limits) · [Documentation](#documentation) · [Contributing](#contributing)
+
 ## Before / after
 
-The same failing request, with INFO turned off in production:
+The same failing request, with INFO turned off in production.
 
-**Plain SLF4J**
+**Plain SLF4J:**
 
 ```
 10:33:15.376 ERROR [req-9b21] OrderController - Payment failed for order fail
@@ -37,7 +39,7 @@ java.lang.IllegalStateException: card declined (code 51)
 java.lang.IllegalStateException: card declined (code 51)
 ```
 
-The second block is real output from the [Spring Boot demo](examples/spring-boot-demo). Run it with `make demo`.
+That's real output from the [Spring Boot demo](examples/spring-boot-demo). Run it with `make demo`.
 
 ## Quick start: Spring Boot
 
@@ -51,8 +53,9 @@ The second block is real output from the [Spring Boot demo](examples/spring-boot
 </dependency>
 ```
 
-```kotlin
-implementation("io.github.parvez3019:log4error-spring-boot-starter:0.2.0")
+```groovy
+implementation 'io.github.parvez3019:log4error-spring-boot-starter:0.2.0'      // Gradle
+implementation("io.github.parvez3019:log4error-spring-boot-starter:0.2.0")     // Gradle Kotlin DSL
 ```
 
 **2. Log through `RequestLogger`.**
@@ -70,22 +73,36 @@ try {
 }
 ```
 
-**3. Configure it (optional).**
+**3. Let log4error's lines through your logging backend.** ⚠️ **Required.**
+
+The buffered lines are written through SLF4J at flush time, so your backend still applies its level filter to them. Keep your app at WARN if you like, but allow INFO/DEBUG for log4error's logger. Otherwise only the ERROR line is printed and the context is silently dropped.
+
+```yaml
+logging:
+  level:
+    root: WARN                 # your normal production level
+    io.github.parvez3019: DEBUG  # let flushed INFO/DEBUG lines through
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%X{x-request-id:-}] %logger{20} - %msg%n"
+```
+
+This is safe: log4error's logger only writes when a request fails.
+
+**4. Tune it (optional).** These are the defaults:
 
 ```yaml
 log4error:
-  enabled: true               # set false to turn the filter off
-  buffer-size: 500            # max buffered events per request; oldest are dropped
+  enabled: true
+  buffer-size: 500              # max buffered events per request; oldest are dropped
   request-id-header: x-request-id
-  mdc-key: x-request-id       # use %X{x-request-id} in your log pattern
-  filter-order: -2147483638   # Ordered.HIGHEST_PRECEDENCE + 10
+  mdc-key: x-request-id
 ```
 
-The starter works with any Spring Boot 3.x servlet app (Spring MVC on Tomcat, Jetty or Undertow). To replace the filter, declare your own `Log4ErrorFilter` bean.
+See the **[Spring Boot guide](docs/spring-boot.md)** for every property, replacing the filter, background threads, and testing.
 
-## Quick start: plain servlet or non-Boot apps
+## Quick start: plain servlet and non-Boot apps
 
-Add the core library. It depends only on `slf4j-api`:
+Add the core library. It has a single dependency, `slf4j-api`:
 
 ```xml
 <dependency>
@@ -95,40 +112,33 @@ Add the core library. It depends only on `slf4j-api`:
 </dependency>
 ```
 
-```groovy
-implementation 'io.github.parvez3019:log4error:0.2.0'
-```
-
-Then bind a `Logger` per request. [`examples/LoggerFilterExample.java`](examples/LoggerFilterExample.java) is a copy-paste filter:
+Bind a `Logger` per request and always remove it. [`examples/LoggerFilterExample.java`](examples/LoggerFilterExample.java) is a copy-paste filter:
 
 ```java
-requestLogInfoThreadLocal.set(new Logger());
+requestLogInfoThreadLocal.set(Logger.of(OrderService.class)); // or new Logger()
 try {
     filterChain.doFilter(request, response);
 } finally {
-    requestLogInfoThreadLocal.remove(); // prevent ThreadLocal leaks on pooled threads
+    requestLogInfoThreadLocal.remove(); // prevents leaks on pooled threads
 }
 ```
 
-To keep call-site logger names in flushed output, build the request logger with `Logger.of(MyService.class)`.
+The backend rule from step 3 applies here too: allow INFO/DEBUG for the logger you pass to `Logger.of(...)`, or for `io.github.parvez3019` if you use `new Logger()`.
 
-## How it works
+## API
 
-1. A servlet filter creates a request-scoped `Logger` and stores it in a `ThreadLocal`.
-2. `info()` / `debug()` append messages to an in-memory list. No console or file I/O happens.
-3. `error()` prints the buffered logs, logs the error, then clears the buffer.
-4. The filter removes the ThreadLocal when the request finishes.
+| Method | Behavior |
+|--------|----------|
+| `info(msg, args...)` / `debug(msg, args...)` | Buffer the message. No I/O happens. |
+| `error(msg, args...)` | Flush the buffer, log the ERROR, then clear the buffer |
+| `pInfo` / `pDebug` / `pWarn` / `pError` | Write immediately through SLF4J (not buffered). Use for logs that must always appear. |
+| `printInfoLogs()` | Flush the buffer without clearing it |
+| `clearInfoLogStack()` | Discard the buffer |
+| `Logger.of(Class)` / `Logger.of(org.slf4j.Logger)` | Create a logger whose flushed lines carry that logger name |
+| `new Logger(int maxBufferSize)` | Create a logger with a custom buffer cap (default 500) |
+| `RequestLogger.get()` *(starter)* | The current request's `Logger` |
 
-```
-Request start
-    │
-    ├─ info("fetched user {}", id)     → buffered
-    ├─ debug("cache miss")             → buffered
-    ├─ info("calling payment API")     → buffered
-    │
-    ├─ happy path  → buffer discarded, nothing written
-    └─ error(...)  → flush buffer + error log → clear
-```
+Messages use SLF4J `{}` placeholders. A trailing `Throwable` on `info`/`debug` keeps its stack trace when flushed. For exact flush semantics, see **[How it works](docs/how-it-works.md)**.
 
 ## Performance
 
@@ -156,22 +166,11 @@ SLF4jBenchmark.infoWriteThenError   avgt    5  1379847.224 ±  98604.677  ns/op
 
 </details>
 
-## API
+## When to use it
 
-| Method | Behavior |
-|--------|----------|
-| `info(msg, args...)` | Buffer an INFO message |
-| `debug(msg, args...)` | Buffer a DEBUG message |
-| `error(msg, args...)` | Flush buffer → log ERROR → clear buffer |
-| `pInfo` / `pDebug` / `pWarn` / `pError` | Pass-through to SLF4J (no buffering) |
-| `printInfoLogs()` | Flush buffer without clearing |
-| `clearInfoLogStack()` | Discard buffered logs |
-| `Logger.of(Class)` / `Logger.of(org.slf4j.Logger)` | Factory with call-site logger identity |
-| `RequestLogger.get()` *(starter)* | The current request's `Logger` |
+**Good fit:** request/response services where most requests succeed, INFO volume is a real cost, and you debug failures from logs.
 
-The default buffer cap is **500** events. When it's exceeded, the oldest entries are dropped and a single WARN is logged. Messages use SLF4J `{}` placeholders, and a trailing throwable on a buffered call keeps its stack trace when flushed.
-
-## Why not just…?
+**Not a fit:** audit or security trails that must always be written (use `pInfo`/your normal logger), long-running batch jobs without a clear per-unit boundary, or fully reactive stacks (not supported yet).
 
 | Alternative | Trade-off |
 |-------------|-----------|
@@ -184,26 +183,31 @@ The pattern exists in other ecosystems: PHP Monolog's `FingersCrossedHandler`, P
 
 ## Limits
 
-The buffer is bound to the request thread. It is **not** propagated to `@Async` methods, WebFlux, or child threads ([help wanted](https://github.com/parvez3019/log4error/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)).
+- **Thread-bound.** The buffer isn't propagated to `@Async`, executors, WebFlux, or child threads ([#20](https://github.com/parvez3019/log4error/issues/20), [#24](https://github.com/parvez3019/log4error/issues/24)).
+- **Flush-time timestamps.** Flushed lines carry the time of the flush, not the time of the original call ([details](docs/how-it-works.md#timestamps-and-argument-formatting)).
+- **One logger name per request with the starter.** Flushed lines appear under `io.github.parvez3019.Logger` ([#22](https://github.com/parvez3019/log4error/issues/22)).
 
-## Docs
+## Documentation
 
-- [Changelog](CHANGELOG.md): history for each released tag
-- [Upgrade to 0.1.0](docs/upgrade-0.1.0.md): breaking changes from 0.0.x
-- [Spring Boot demo](examples/spring-boot-demo): runnable before/after demo
-- [AI prompt: integrate & migrate](docs/INTEGRATE_AND_MIGRATE_PROMPT.md): a ready-to-paste agent prompt for adopting log4error from SLF4J, Log4j, Logback or `java.util.logging`
-- [Medium deep dive](https://medium.com/@pha3019/log4error-java-library-for-reduced-info-level-logging-5f1c29867fc4)
-- [Docs index](docs/README.md)
+| Guide | What's in it |
+|-------|--------------|
+| [Spring Boot guide](docs/spring-boot.md) | Starter properties, replacing the filter, background threads, testing |
+| [How it works](docs/how-it-works.md) | Request lifecycle, flush semantics, buffer cap, memory, threading |
+| [Troubleshooting & FAQ](docs/troubleshooting.md) | "Nothing printed on error", missing request IDs, async logs, and more |
+| [Upgrade to 0.2.0](docs/upgrade-0.2.0.md) | Switching from a copied filter to the starter |
+| [Upgrade to 0.1.0](docs/upgrade-0.1.0.md) | Breaking changes from 0.0.x |
+| [AI prompt: integrate & migrate](docs/INTEGRATE_AND_MIGRATE_PROMPT.md) | A paste-ready agent prompt for adopting log4error |
+| [Changelog](CHANGELOG.md) | Release history |
+| [Medium deep dive](https://medium.com/@pha3019/log4error-java-library-for-reduced-info-level-logging-5f1c29867fc4) | Background and motivation |
 
 ## Contributing
 
-Issues, ideas and PRs are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [good first issues](https://github.com/parvez3019/log4error/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). For questions or to share how you use log4error, head to [Discussions](https://github.com/parvez3019/log4error/discussions).
+Issues, ideas and PRs are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [good first issues](https://github.com/parvez3019/log4error/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). For questions, or to share how you use log4error, go to [Discussions](https://github.com/parvez3019/log4error/discussions).
 
 ```bash
 make verify     # clean + unit + integration tests (all modules)
 make demo       # run the Spring Boot demo on :8080
 make benchmark  # JMH (optional)
-make help
 ```
 
 Building requires JDK 17+ and Maven.

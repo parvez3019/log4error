@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Docs: [Spring Boot guide](docs/spring-boot.md), [How it works](docs/how-it-works.md), [Troubleshooting & FAQ](docs/troubleshooting.md), [Upgrade to 0.2.0](docs/upgrade-0.2.0.md)
+
+### Changed
+- README now states that the backend must allow INFO/DEBUG for the flushing logger (otherwise flushed context is dropped), and adds a contents line, a "When to use it" section, and a Limits list
+
 ## [0.2.0] - 2026-11-17
 
 Spring Boot starter release. The core artifact `io.github.parvez3019:log4error` keeps its coordinates and API, so no migration is needed.
