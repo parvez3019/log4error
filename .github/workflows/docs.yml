@@ -34,7 +34,7 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
-      - name: Build (strict: broken links fail the build)
+      - name: "Build (strict: broken links fail the build)"
         run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
