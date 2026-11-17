@@ -1,8 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-    <img src="docs/assets/logo.svg" alt="log4error" width="360">
-  </picture>
+  <img src="docs/assets/logo.svg" alt="log4error" width="360">
 </p>
 
 <p align="center">

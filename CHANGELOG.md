@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Documentation website at https://parvez3019.github.io/log4error/ (MkDocs Material, deployed by `.github/workflows/docs.yml`), with per-page meta descriptions, a sitemap and social preview tags
 - Docs: [When to use it & comparison](docs/comparison.md), [Performance](docs/performance.md)
-- Light and dark logo (`docs/assets/logo.svg`, `logo-dark.svg`)
+- Logo (`docs/assets/logo.svg`), with colors that stay readable in light and dark themes
 - Docs: [Spring Boot guide](docs/spring-boot.md), [How it works](docs/how-it-works.md), [Troubleshooting & FAQ](docs/troubleshooting.md), [Upgrade to 0.2.0](docs/upgrade-0.2.0.md)
 
 ### Changed
