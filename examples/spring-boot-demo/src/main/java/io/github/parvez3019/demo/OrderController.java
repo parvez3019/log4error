@@ -1,6 +1,7 @@
 package io.github.parvez3019.demo;
 
 import io.github.parvez3019.spring.RequestLogger;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-    @GetMapping("/orders/{id}")
+    @GetMapping(value = "/orders/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> order(@PathVariable String id) {
         RequestLogger.get().info("Fetching order {}", id);
         RequestLogger.get().info("Order {} has 3 items, total=42.50 EUR", id);
@@ -25,7 +26,8 @@ public class OrderController {
             RequestLogger.get().error("Payment failed for order {}", id, ex);
             return ResponseEntity.status(502).body("payment failed\n");
         }
-        return ResponseEntity.ok("order " + id + " paid\n");
+        // Fixed body: never echo request input back in the response.
+        return ResponseEntity.ok("order paid\n");
     }
 
     private void charge(String id) {
