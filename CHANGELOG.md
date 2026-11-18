@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Docs: [Spring Boot guide](docs/spring-boot.md), [How it works](docs/how-it-works.md), [Troubleshooting & FAQ](docs/troubleshooting.md), [Upgrade to 0.2.0](docs/upgrade-0.2.0.md)
 
 ### Changed
+- Use an `ArrayDeque` for buffered log events so dropping the oldest event at capacity no longer shifts the remaining entries; ordering and the once-per-buffer warning are unchanged.
 - Publish workflow: can be run manually (`workflow_dispatch`), and now publishes to Maven Central automatically (`autoPublish=true`, waits until `PUBLISHED`) instead of leaving a deployment for a manual Publish click
 - README restyled: centered logo, badges and nav links, "Why log4error?" list, 5-minute demo quickstart, Tech stack table
 - Build: `central-publishing-maven-plugin` 0.4.0 → 0.12.0. 0.4.0 crashed reading Central's validation response (`Unrecognized field "warnings"`), which failed the 0.2.0 publish job after the upload
