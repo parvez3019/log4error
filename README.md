@@ -85,6 +85,19 @@ curl localhost:8080/orders/fail   # fails: the full trail is logged
 </dependency>
 ```
 
+For Gradle, add the starter to the `dependencies` block in `build.gradle`:
+
+```groovy
+implementation 'io.github.parvez3019:log4error-spring-boot-starter:0.2.0'
+```
+
+| Requirement | Compatibility |
+|-------------|---------------|
+| Java | 17 or later |
+| Spring Boot | 3.x servlet applications (tested with 3.3.5) |
+| Logging API | SLF4J 2.x |
+| Logging backend | Logback (tested), Log4j2 (untested) |
+
 ```yaml
 # application.yml
 logging:

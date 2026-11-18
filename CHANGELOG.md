@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Groovy Gradle quick start and a Spring Boot starter compatibility table in the README
 - Documentation website at https://parvez3019.github.io/log4error/ (MkDocs Material, deployed by `.github/workflows/docs.yml`), with per-page meta descriptions, a sitemap and social preview tags
 - Docs: [When to use it & comparison](docs/comparison.md), [Performance](docs/performance.md)
 - Logo (`docs/assets/logo.svg`), with colors that stay readable in light and dark themes
