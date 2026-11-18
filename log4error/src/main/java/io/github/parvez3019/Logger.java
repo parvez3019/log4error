@@ -3,9 +3,9 @@ package io.github.parvez3019;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.MessageFormatter;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Deque;
 
 /**
  * Request-scoped buffer for INFO/DEBUG logs that are written only when an error occurs
@@ -15,7 +15,7 @@ public class Logger {
     public static final int DEFAULT_MAX_BUFFER_SIZE = 500;
 
     private final org.slf4j.Logger slf4jLogger;
-    private final List<InfoLoggerEvent> collectedLogs;
+    private final Deque<InfoLoggerEvent> collectedLogs;
     private final int maxBufferSize;
     private boolean bufferCapWarned;
 
@@ -59,7 +59,7 @@ public class Logger {
         }
         this.slf4jLogger = slf4jLogger;
         this.maxBufferSize = maxBufferSize;
-        this.collectedLogs = new ArrayList<>();
+        this.collectedLogs = new ArrayDeque<>();
     }
 
     /**
@@ -180,14 +180,14 @@ public class Logger {
             args = Arrays.copyOf(source, source.length);
         }
         ensureCapacity();
-        collectedLogs.add(new InfoLoggerEvent(level, message, args, throwableCandidate));
+        collectedLogs.addLast(new InfoLoggerEvent(level, message, args, throwableCandidate));
     }
 
     private void ensureCapacity() {
         if (collectedLogs.size() < maxBufferSize) {
             return;
         }
-        collectedLogs.remove(0);
+        collectedLogs.removeFirst();
         if (!bufferCapWarned) {
             slf4jLogger.warn(
                     "log4error buffer cap ({}) reached; dropping oldest buffered events for this request",
