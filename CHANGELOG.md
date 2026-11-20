@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Class-specific request logger views via `RequestLogger.get(Class)`, sharing the request buffer
+- Buffered events retain their originating SLF4J logger name when flushed
+
+### Added
 - Documentation website at https://parvez3019.github.io/log4error/ (MkDocs Material, deployed by `.github/workflows/docs.yml`), with per-page meta descriptions, a sitemap and social preview tags
 - Docs: [When to use it & comparison](docs/comparison.md), [Performance](docs/performance.md)
 - Logo (`docs/assets/logo.svg`), with colors that stay readable in light and dark themes
