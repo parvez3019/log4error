@@ -123,6 +123,7 @@ The full docs are published at **[parvez3019.github.io/log4error](https://parvez
 | `printInfoLogs()` / `clearInfoLogStack()` | Flush without clearing / discard |
 | `Logger.of(Class)`, `new Logger(int)` | Custom logger name / buffer cap |
 | `RequestLogger.get()` *(starter)* | The current request's logger |
+| `RequestLogger.get(Class)` *(starter)* | A class-specific view sharing the current request buffer |
 
 **Limits:** the buffer is thread-bound, so it isn't shared with `@Async`, executors or WebFlux ([#20](https://github.com/parvez3019/log4error/issues/20), [#24](https://github.com/parvez3019/log4error/issues/24)). Flushed lines carry the flush timestamp.
 

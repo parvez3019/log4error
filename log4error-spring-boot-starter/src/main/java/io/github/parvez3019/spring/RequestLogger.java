@@ -31,6 +31,16 @@ public final class RequestLogger {
     }
 
     /**
+     * Returns a logger view using the given class name while sharing the current request buffer.
+     *
+     * @param clazz class whose name should appear on flushed events
+     * @return a class-specific logger view for the current request
+     */
+    public static Logger get(Class<?> clazz) {
+        return HOLDER.getLogger().withLogger(clazz);
+    }
+
+    /**
      * @return true when a Logger is bound to the current thread
      */
     public static boolean isBound() {

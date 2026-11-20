@@ -6,6 +6,7 @@ import org.slf4j.helpers.MessageFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Request-scoped buffer for INFO/DEBUG logs that are written only when an error occurs
@@ -15,9 +16,7 @@ public class Logger {
     public static final int DEFAULT_MAX_BUFFER_SIZE = 500;
 
     private final org.slf4j.Logger slf4jLogger;
-    private final List<InfoLoggerEvent> collectedLogs;
-    private final int maxBufferSize;
-    private boolean bufferCapWarned;
+    private final BufferState buffer;
 
     /**
      * Creates a logger that writes through {@code io.github.parvez3019.Logger}.
@@ -51,15 +50,15 @@ public class Logger {
      * @param maxBufferSize maximum buffered events; oldest are dropped when exceeded
      */
     public Logger(org.slf4j.Logger slf4jLogger, int maxBufferSize) {
+        this(slf4jLogger, new BufferState(maxBufferSize));
+    }
+
+    private Logger(org.slf4j.Logger slf4jLogger, BufferState buffer) {
         if (slf4jLogger == null) {
             throw new IllegalArgumentException("slf4jLogger must not be null");
         }
-        if (maxBufferSize < 1) {
-            throw new IllegalArgumentException("maxBufferSize must be at least 1");
-        }
         this.slf4jLogger = slf4jLogger;
-        this.maxBufferSize = maxBufferSize;
-        this.collectedLogs = new ArrayList<>();
+        this.buffer = buffer;
     }
 
     /**
@@ -80,6 +79,16 @@ public class Logger {
      */
     public static Logger of(org.slf4j.Logger slf4jLogger) {
         return new Logger(slf4jLogger);
+    }
+
+    /**
+     * Creates a logger view that uses the given class name while sharing this logger's buffer.
+     *
+     * @param clazz class whose name is attached to events written through the returned view
+     * @return a logger view sharing this logger's request buffer
+     */
+    public Logger withLogger(Class<?> clazz) {
+        return new Logger(LoggerFactory.getLogger(Objects.requireNonNull(clazz, "clazz")), buffer);
     }
 
     /**
@@ -109,15 +118,15 @@ public class Logger {
      * Prints buffered logs without clearing the buffer.
      */
     public void printInfoLogs() {
-        collectedLogs.forEach(this::printLog);
+        buffer.events.forEach(this::printLog);
     }
 
     /**
      * Discards all buffered logs.
      */
     public void clearInfoLogStack() {
-        collectedLogs.clear();
-        bufferCapWarned = false;
+        buffer.events.clear();
+        buffer.capWarned = false;
     }
 
     /**
@@ -152,14 +161,14 @@ public class Logger {
      * @return number of currently buffered events
      */
     public int bufferedSize() {
-        return collectedLogs.size();
+        return buffer.events.size();
     }
 
     /**
      * @return configured maximum buffer size
      */
     public int getMaxBufferSize() {
-        return maxBufferSize;
+        return buffer.maxBufferSize;
     }
 
     /**
@@ -180,29 +189,30 @@ public class Logger {
             args = Arrays.copyOf(source, source.length);
         }
         ensureCapacity();
-        collectedLogs.add(new InfoLoggerEvent(level, message, args, throwableCandidate));
+        buffer.events.add(new InfoLoggerEvent(level, message, args, throwableCandidate, slf4jLogger.getName()));
     }
 
     private void ensureCapacity() {
-        if (collectedLogs.size() < maxBufferSize) {
+        if (buffer.events.size() < buffer.maxBufferSize) {
             return;
         }
-        collectedLogs.remove(0);
-        if (!bufferCapWarned) {
+        buffer.events.remove(0);
+        if (!buffer.capWarned) {
             slf4jLogger.warn(
                     "log4error buffer cap ({}) reached; dropping oldest buffered events for this request",
-                    maxBufferSize
+                    buffer.maxBufferSize
             );
-            bufferCapWarned = true;
+            buffer.capWarned = true;
         }
     }
 
     private void printLog(InfoLoggerEvent event) {
+        org.slf4j.Logger eventLogger = LoggerFactory.getLogger(event.loggerName());
         Object[] args = withThrowable(event.argArray(), event.throwable());
         if (event.level() == LoggerLevel.INFO) {
-            slf4jLogger.info(event.message(), args);
+            eventLogger.info(event.message(), args);
         } else if (event.level() == LoggerLevel.DEBUG) {
-            slf4jLogger.debug(event.message(), args);
+            eventLogger.debug(event.message(), args);
         }
     }
 
@@ -214,5 +224,17 @@ public class Logger {
         Object[] withThrowable = Arrays.copyOf(base, base.length + 1);
         withThrowable[base.length] = throwable;
         return withThrowable;
+    }
+    private static final class BufferState {
+        private final List<InfoLoggerEvent> events = new ArrayList<>();
+        private final int maxBufferSize;
+        private boolean capWarned;
+
+        private BufferState(int maxBufferSize) {
+            if (maxBufferSize < 1) {
+                throw new IllegalArgumentException("maxBufferSize must be at least 1");
+            }
+            this.maxBufferSize = maxBufferSize;
+        }
     }
 }
