@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Separate `log4error-log4j2` module with a bounded per-thread buffering appender, delegate forwarding, and request-buffer cleanup API
+
+### Added
 - Documentation website at https://parvez3019.github.io/log4error/ (MkDocs Material, deployed by `.github/workflows/docs.yml`), with per-page meta descriptions, a sitemap and social preview tags
 - Docs: [When to use it & comparison](docs/comparison.md), [Performance](docs/performance.md)
 - Logo (`docs/assets/logo.svg`), with colors that stay readable in light and dark themes
