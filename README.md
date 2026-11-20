@@ -99,6 +99,54 @@ Then log through `RequestLogger.get()` and call `.error(...)` where you handle f
 
 **Not on Spring Boot?** Add `io.github.parvez3019:log4error:0.2.0` and copy the [request filter example](examples/LoggerFilterExample.java). See [How it works](docs/how-it-works.md).
 
+## Log4j2 integration
+
+For applications using Log4j2 directly, add the separate appender module. It does not add Log4j dependencies to the core artifact.
+
+```xml
+<dependency>
+    <groupId>io.github.parvez3019</groupId>
+    <artifactId>log4error-log4j2</artifactId>
+    <version>0.2.0</version>
+</dependency>
+```
+
+Configure a normal appender as the delegate and reference it only from `Log4ErrorAppender`:
+
+```xml
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level [%t] %logger - %msg%n"/>
+        </Console>
+        <Log4ErrorAppender name="LOG4ERROR" bufferSize="500">
+            <AppenderRef ref="CONSOLE"/>
+        </Log4ErrorAppender>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="LOG4ERROR"/>
+        </Root>
+    </Loggers>
+</Configuration>
+```
+
+INFO and DEBUG events are buffered per thread. An ERROR or FATAL event flushes that thread's buffered events to the configured delegate before forwarding the error. WARN and other non-buffered levels pass through immediately. The buffer is bounded and drops the oldest event when full.
+
+Clear the appender's thread buffer at the end of each successful request so a reused servlet thread cannot carry events into the next request:
+
+```java
+LoggerContext context = (LoggerContext) LogManager.getContext(false);
+Log4ErrorAppender appender =
+        (Log4ErrorAppender) context.getConfiguration().getAppender("LOG4ERROR");
+
+try {
+    // handle the request
+} finally {
+    appender.clearThreadBuffer();
+}
+```
+
 ## Documentation
 
 The full docs are published at **[parvez3019.github.io/log4error](https://parvez3019.github.io/log4error/)**, and are also readable here on GitHub:
